@@ -58,7 +58,7 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 
 	//プレイヤー
 	Player::GetInstance()->LoadResource();
-	Player::GetInstance()->InitState({ 0.0f,0.0f,0.0f });
+	Player::GetInstance()->InitState({ 0.0f,-5.0f,0.0f });
 	Player::GetInstance()->Initialize();
 
 	////敵
@@ -73,7 +73,7 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	tex->SetPosition({ 5.0f,2.0f,0.0f });
 	tex->SetScale({ 0.5f,0.5f,0.5f });
 	tex->SetIsBillboard(true);
-	tex->SetColor({ 1.0f,0.0,0.0f,1.0f });
+	//tex->SetColor({ 1.0f,0.0,0.0f,1.0f });
 }
 
 void FirstStageActor::Finalize() {
