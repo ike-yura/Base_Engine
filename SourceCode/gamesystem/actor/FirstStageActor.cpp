@@ -19,6 +19,8 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	m_SceneState = SceneState::IntroState;
 
 	lightgroup->SetCircleShadowActive(0, true);
+
+	/*
 	lightgroup->SetCircleShadowActive(1, true);
 	lightgroup->SetDirLightActive(0, true);
 
@@ -26,7 +28,14 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	///ポイントライト
 	lightgroup->SetPointLightPos(0, XMFLOAT3(Player::GetInstance()->GetPosition().x, Player::GetInstance()->GetPosition().y + 2.0f, Player::GetInstance()->GetPosition().z - 5.0f));
 	lightgroup->SetPointLightColor(0, XMFLOAT3(pointLightColor));
-	lightgroup->SetPointLightAtten(0, XMFLOAT3({ 6.0f,6.0f,6.0f }));
+	lightgroup->SetPointLightAtten(0, XMFLOAT3({ 6.0f,6.0f,6.0f }));*/
+
+	//ライト
+	/*lightgroup->SetDirLightActive(0, true);
+	lightgroup->SetDirLightActive(1, true);
+	lightgroup->SetDirLightActive(2, true);
+	lightgroup->SetPointLightActive(0, false);
+	lightgroup->SetPointLightActive(1, false);*/
 
 	
 	//地面
@@ -76,6 +85,12 @@ void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 
 	//各クラス更新
 	camerawork->Update(camera);
+
+	//プレイヤー
+	lightgroup->SetCircleShadowDir(0, XMVECTOR({ circleShadowDir[0], circleShadowDir[1], circleShadowDir[2], 0 }));
+	lightgroup->SetCircleShadowCasterPos(0, XMFLOAT3({ Player::GetInstance()->GetPosition().x, 0.0f, Player::GetInstance()->GetPosition().z }));
+	lightgroup->SetCircleShadowAtten(0, XMFLOAT3(circleShadowAtten));
+	lightgroup->SetCircleShadowFactorAngle(0, XMFLOAT2(circleShadowFactorAngle));
 	lightgroup->Update();
 	ground->Update();
 	skydome->Update();
