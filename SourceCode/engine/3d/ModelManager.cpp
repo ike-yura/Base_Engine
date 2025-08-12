@@ -16,7 +16,7 @@ void ModelManager::StartInitialize()
 	LoadModel(GROUND, "ground");
 	LoadModel(PLAYERMODEL, "chr_knight");
 	LoadModel(SKYDOME, "skydome");
-	LoadFBXModel(PLAYER, "kotoko");
+	//LoadFBXModel(PLAYER, "kotoko");
 }
 
 //モデル読み込み(非同期処理で読み込むもの)
