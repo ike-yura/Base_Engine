@@ -22,7 +22,13 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	lightgroup->SetCircleShadowActive(1, true);
 	lightgroup->SetDirLightActive(0, true);
 
+	lightgroup->Update();
+	///ポイントライト
+	lightgroup->SetPointLightPos(0, XMFLOAT3(Player::GetInstance()->GetPosition().x, Player::GetInstance()->GetPosition().y + 2.0f, Player::GetInstance()->GetPosition().z - 5.0f));
+	lightgroup->SetPointLightColor(0, XMFLOAT3(pointLightColor));
+	lightgroup->SetPointLightAtten(0, XMFLOAT3({ 6.0f,6.0f,6.0f }));
 
+	
 	//地面
 	ground.reset(new IKEObject3d());
 	ground->Initialize();
