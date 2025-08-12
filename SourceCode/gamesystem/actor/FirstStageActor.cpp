@@ -20,6 +20,8 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 
 	lightgroup->SetCircleShadowActive(0, true);
 	lightgroup->SetCircleShadowActive(1, true);
+	lightgroup->SetDirLightActive(0, true);
+
 
 	//地面
 	ground.reset(new IKEObject3d());
@@ -34,7 +36,8 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	skydome.reset(new IKEObject3d());
 	skydome->Initialize();
 	skydome->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SKYDOME));
-	skydome->SetScale({ 8.f,8.f,8.f });
+	skydome->SetScale({ 1.f,1.f,1.f });
+	skydome->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 	skydome->SetPosition({ 0.0f,0.0f,0.0f });
 	skydome->VertexCheck();
 
@@ -43,11 +46,11 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	Player::GetInstance()->InitState({ 0.0f,0.0f,0.0f });
 	Player::GetInstance()->Initialize();
 
-	//敵
-	for (int i = 0; i < enemy.size(); i++) {
-		enemy[i].reset(new NormalEnemy());
-		enemy[i]->Initialize();
-	}
+	////敵
+	//for (int i = 0; i < enemy.size(); i++) {
+	//	enemy[i].reset(new NormalEnemy());
+	//	enemy[i]->Initialize();
+	//}
 
 	//テクスチャ
 	tex.reset(IKETexture::Create(ImageManager::MAGIC, { 0,0,0 }, { 0.5f,0.5f,0.5f }, { 1,1,1,1 }));
@@ -73,9 +76,10 @@ void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	m_AddOffset.x = 0.001f;
 	ground->SetAddOffset(m_AddOffset.x);
 	Player::GetInstance()->Update();
+	/*
 	for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Update();
-	}
+	}*/
 	tex->Update();
 }
 
@@ -112,10 +116,10 @@ void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	IKEObject3d::PreDraw();
 	ground->Draw();
 	skydome->Draw();
-	//Player::GetInstance()->Draw(dxCommon);
-	for (int i = 0; i < enemy.size(); i++) {
+	Player::GetInstance()->Draw(dxCommon);
+	/*for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Draw(dxCommon);
-	}
+	}*/
 	IKEObject3d::PostDraw();
 
 	IKETexture::PreDraw2(dxCommon, AlphaBlendType);
