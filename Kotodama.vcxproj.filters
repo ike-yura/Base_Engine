@@ -321,9 +321,6 @@
     <ClCompile Include="SourceCode\gamesystem\character\NormalEnemy.cpp">
       <Filter>gamesystem\charactor\Enemy\Other</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\engine\excel\ExcelLoader.cpp">
-      <Filter>engine\excel</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\engine\camera\DebugCamera.h">
@@ -607,9 +604,6 @@
     <ClInclude Include="SourceCode\gamesystem\character\NormalEnemy.h">
       <Filter>gamesystem\charactor\Enemy\Other</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\engine\excel\ExcelLoader.h">
-      <Filter>engine\excel</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli">
@@ -820,9 +814,6 @@
     </Filter>
     <Filter Include="gamesystem\charactor\Enemy\Other">
       <UniqueIdentifier>{1ffa4f48-0455-458c-b71a-9647e9a620dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="engine\excel">
-      <UniqueIdentifier>{b7ed2e4a-6372-4d70-bdb4-a169c0de4059}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
