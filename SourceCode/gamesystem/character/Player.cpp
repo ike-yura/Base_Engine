@@ -78,10 +78,10 @@ void Player::Update()
 		rot.y = angle + atan2f(StickX, StickY) * (PI_180 / PI);
 
 		//プレイヤーの回転角を取る
-		m_Rotation = { rot.x, rot.y, rot.z };
+		m_Rotation = { rot.x, rot.y + 180.0f, rot.z };
 
 		XMVECTOR move = { 0.0f, 0.0f, 0.1f, 0.0f };
-		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(m_Rotation.y));
+		XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(rot.y));
 		move = XMVector3TransformNormal(move, matRot);
 
 		m_Position.x += move.m128_f32[0] * m_AddSpeed;
@@ -108,5 +108,6 @@ void Player::Draw(DirectXCommon* dxCommon)
 void Player::ImGuiDraw() {
 	ImGui::Begin("Player");
 	ImGui::Text("AddPower:%f", m_AddSpeed);
+	ImGui::Text("RotX:%f", m_Rotation.y);
 	ImGui::End();
 }
