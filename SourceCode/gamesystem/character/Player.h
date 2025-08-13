@@ -19,6 +19,8 @@ public:
 	void Draw(DirectXCommon* dxCommon)override;
 	//ImGui
 	void ImGuiDraw();
+	//パーティクル
+	void BirthParticle();
 	
 private:
 	XMFLOAT3 MoveVECTOR(XMVECTOR v, float angle);

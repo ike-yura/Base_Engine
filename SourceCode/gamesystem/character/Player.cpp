@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "Easing.h"
 #include "Collision.h"
+#include "ParticleEmitter.h"
 Player* Player::GetInstance()
 {
 	static Player instance;
@@ -87,6 +88,12 @@ void Player::Update()
 		m_Position.x += move.m128_f32[0] * m_AddSpeed;
 		m_Position.z += move.m128_f32[2] * m_AddSpeed;
 	}
+
+	//リミット制限
+	Helper::GetInstance()->Clamp(m_Position.x, -5.0f, 5.0f);
+	Helper::GetInstance()->Clamp(m_Position.z, -5.0f, 5.0f);
+
+	BirthParticle();
 	Obj_SetParam();
 }
 //VECTOR
@@ -109,5 +116,16 @@ void Player::ImGuiDraw() {
 	ImGui::Begin("Player");
 	ImGui::Text("AddPower:%f", m_AddSpeed);
 	ImGui::Text("RotX:%f", m_Rotation.y);
+	ImGui::Text("PosX:%f", m_Position.x);
+	ImGui::Text("PosZ:%f", m_Position.z);
 	ImGui::End();
+}
+
+void Player::BirthParticle() {
+	XMFLOAT4 s_color = { 1.0f,0.5f,0.0f,0.5f };
+	XMFLOAT4 e_color = { 1.0f,0.5f,0.0f,0.5f };
+	float s_scale = 3.0f;
+	float e_scale = 0.0f;
+
+	ParticleEmitter::GetInstance()->FireEffect(50, { m_Position.x,m_Position.y + 2.0f,m_Position.z }, s_scale, e_scale, s_color, e_color);
 }

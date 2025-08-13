@@ -97,6 +97,7 @@ void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	m_AddOffset.x = 0.001f;
 	ground->SetAddOffset(m_AddOffset.x);
 	Player::GetInstance()->Update();
+	ParticleEmitter::GetInstance()->Update();
 	/*
 	for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Update();
@@ -130,13 +131,14 @@ void FirstStageActor::Draw(DirectXCommon* dxCommon) {
 }
 //ポストエフェクトかからない
 void FirstStageActor::FrontDraw(DirectXCommon* dxCommon) {
-
+	ParticleEmitter::GetInstance()->FlontDrawAll();
 }
 //ポストエフェクトかかる
 void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	IKEObject3d::PreDraw();
 	ground->Draw();
 	skydome->Draw();
+	
 	Player::GetInstance()->Draw(dxCommon);
 	/*for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Draw(dxCommon);
