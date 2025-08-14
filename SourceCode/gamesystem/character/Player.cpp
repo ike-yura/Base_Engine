@@ -35,6 +35,11 @@ void Player::LoadCSV() {
 	m_HP = loader->getIntValue("Hp");
 
 }
+
+void Player::reLoadCSV() {
+	loader->reload();
+	LoadCSV();
+}
 //ステータスの初期化
 void Player::InitState(const XMFLOAT3& pos) {
 	m_Position = pos;
@@ -123,6 +128,9 @@ void Player::ImGuiDraw() {
 	ImGui::Text("PosX:%f", m_Position.x);
 	ImGui::Text("PosZ:%f", m_Position.z);
 	ImGui::Text("HP:%d", m_HP);
+	if (ImGui::Button("reLoad", ImVec2(90, 50))) {
+		reLoadCSV();
+	}
 	ImGui::End();
 }
 

@@ -27,6 +27,7 @@ private:
 	XMFLOAT3 MoveVECTOR(XMVECTOR v, float angle);
 private:
 	void LoadCSV();
+	void reLoadCSV();
 
 private:
 	//移動方向指定用
