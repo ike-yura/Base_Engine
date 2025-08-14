@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "ObjCommon.h"
+#include "CsvLoader.h"
 #include <any>
 using namespace DirectX;
 class Player :public ObjCommon
@@ -34,4 +35,9 @@ private:
 	float velocity;
 	//移動加算値
 	float m_AddSpeed;
+	//プレイヤーのHP
+	int m_HP = 0;
+
+private:
+	unique_ptr<CsvLoader> loader = nullptr;
 };

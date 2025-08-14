@@ -23,13 +23,17 @@ void Player::LoadResource() {
 //初期化
 bool Player::Initialize()
 {
+	loader = std::make_unique<CsvLoader>("Resources/csv/chara/player/CharaData.csv");
+
 	LoadCSV();
 	//CSV読み込み
 	return true;
 }
 //CSV読み込み
 void Player::LoadCSV() {
-	m_AddSpeed = static_cast<float>(std::any_cast<double>(LoadCSV::LoadCsvParam("Resources/csv/chara/player/player.csv", "speed2")));
+	m_AddSpeed = loader->getFloatValue("Speed");
+	m_HP = loader->getIntValue("Hp");
+
 }
 //ステータスの初期化
 void Player::InitState(const XMFLOAT3& pos) {
@@ -118,6 +122,7 @@ void Player::ImGuiDraw() {
 	ImGui::Text("RotX:%f", m_Rotation.y);
 	ImGui::Text("PosX:%f", m_Position.x);
 	ImGui::Text("PosZ:%f", m_Position.z);
+	ImGui::Text("HP:%d", m_HP);
 	ImGui::End();
 }
 
