@@ -87,6 +87,7 @@ protected:
 	unique_ptr<CameraWork> camerawork;
 	bool PlayPostEffect = false;
 	unique_ptr<SceneChanger> sceneChanger_ = nullptr;
+	
 	//シーンでの遷移
 	SceneState m_SceneState = SceneState::IntroState;
 protected:

@@ -1,235 +1,79 @@
 #include "CsvLoader.h"
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
-void LoadCSV::LoadCsvParam(std::string FileName, std::string LoadName, std::any& p)
-{
-	std::string line;
-	std::stringstream popcom;
-	std::ifstream file;
-	
-	file.open(FileName);
-
-	popcom << file.rdbuf();
-	
-	while (std::getline(popcom, line))
-	{
-		std::istringstream line_stream(line);
-		std::string word;
-		std::getline(line_stream, word, ',');
-
-		if (word.find("//") == 0)
-		{
-			continue;
-		}
-		if (word.find(LoadName) == 0)
-		{
-			std::getline(line_stream, word, ',');
-			p =(std::atof(word.c_str()));
-			
-			break;
-		}
-	}
-
-	file.close();
+CsvLoader::CsvLoader(const std::string& filename)
+    : filePath(filename) {
+    load();
 }
 
-std::any LoadCSV::LoadCsvParam(std::string FileName, std::string LoadName)
-{
-	std::string line;
-	std::stringstream popcom;
-	std::ifstream file;
+bool CsvLoader::load() {
+    data.clear();
+    tagIndexMap.clear();
 
-	std::string name1 = "Resources/";
-	std::string name2 = "csv/";
-	std::string openFileName = name1 + name2 + FileName;
+    std::ifstream file(filePath);
+    if (!file.is_open()) {
+        std::cerr << "CSVファイルを開けませんでした: " << filePath << "\n";
+        return false;
+    }
 
-	std::any param;
+    std::string line;
+    size_t rowIndex = 0;
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string cell;
+        std::vector<std::string> row;
 
-	file.open(FileName);
+        while (std::getline(ss, cell, ',')) {
+            row.push_back(cell);
+        }
 
-	popcom << file.rdbuf();
+        if (row.size() >= 2) {
+            // 2列目（タグ名）をキャッシュ
+            tagIndexMap[row[1]] = rowIndex;
+        }
 
-	file.close();
-	while (std::getline(popcom, line))
-	{
-		std::istringstream line_stream(line);
-		std::string word;
-		std::getline(line_stream, word, ',');
+        data.push_back(row);
+        rowIndex++;
+    }
 
-		if (word.find("//") == 0)
-		{
-			continue;
-		}
-		if (word.find(LoadName) == 0)
-		{
-			std::getline(line_stream, word, ',');
-			param = (std::atof(word.c_str()));
-
-			break;
-		}
-	}
-
-	return param;
+    return true;
 }
 
-
-void LoadCSV::LoadCsvParam_XMFLOAT3(std::string FileName,std::vector<XMFLOAT3>&obj, std::string LoadName)
-{
-	std::string line;
-	std::stringstream popcom;
-	std::ifstream file;
-
-	file.open(FileName);
-
-	popcom << file.rdbuf();
-
-	file.close();
-
-	std::vector<XMFLOAT3>l_obj(obj.size());
-	for (int i = 0; i < obj.size(); i++) {
-		while (std::getline(popcom, line))
-		{
-			std::istringstream line_stream(line);
-			std::string word;
-			std::getline(line_stream, word, ',');
-
-			if (word.find("//") == 0)
-			{
-				continue;
-			}
-			if (word.find(LoadName) == 0)
-			{
-				std::getline(line_stream, word, ',');
-				float x = static_cast<float>(std::atof(word.c_str()));
-
-				std::getline(line_stream, word, ',');
-				float y = static_cast<float>(std::atof(word.c_str()));
-
-				std::getline(line_stream, word, ',');
-				float z = static_cast<float>(std::atof(word.c_str()));
-
-				l_obj[i] = {x, y, z};
-				break;
-			}
-		}
-	}
-	for (int i = 0; i <obj.size(); i++) {
-		obj[i] = l_obj[i];
-	}
+bool CsvLoader::reload() {
+    return load();
 }
 
-
-void LoadCSV::LoadCsvParam_String(std::string FileName, std::vector<std::string>& obj, std::string LoadName)
-{
-	std::string line;
-	std::stringstream popcom;
-	std::ifstream file;
-
-	file.open(FileName);
-
-	popcom << file.rdbuf();
-
-	file.close();
-
-	std::vector<std::string>l_obj(obj.size());
-	for (int i = 0; i < obj.size(); i++) {
-		while (std::getline(popcom, line))
-		{
-			std::istringstream line_stream(line);
-			std::string word;
-			std::getline(line_stream, word, ',');
-
-			if (word.find("//") == 0)
-			{
-				continue;
-			}
-			if (word.find(LoadName) == 0)
-			{
-				std::getline(line_stream, word, ',');
-				l_obj[i] = word;
-				break;
-			}
-		}
-	}
-	for (int i = 0; i < obj.size(); i++) {
-		obj[i] = l_obj[i];
-	}
+int CsvLoader::getIntValue(const std::string& tag, int defaultValue) const {
+    auto it = tagIndexMap.find(tag);
+    if (it != tagIndexMap.end()) {
+        auto& row = data[it->second];
+        if (row.size() >= 3 && !row[2].empty()) {
+            return std::stoi(row[2]);
+        }
+    }
+    return defaultValue;
 }
 
-
-void LoadCSV::LoadCsvParam_Float(std::string FileName, std::vector<float>& obj, std::string LoadName) {
-	std::string line;
-	std::stringstream popcom;
-	std::ifstream file;
-
-	file.open(FileName);
-
-	popcom << file.rdbuf();
-
-	file.close();
-
-	std::vector<float>l_obj(obj.size());
-	for (int i = 0; i < obj.size(); i++) {
-		while (std::getline(popcom, line))
-		{
-			std::istringstream line_stream(line);
-			std::string word;
-			std::getline(line_stream, word, ',');
-
-			if (word.find("//") == 0)
-			{
-				continue;
-			}
-			if (word.find(LoadName) == 0)
-			{
-
-				std::getline(line_stream, word, ',');
-				float variable = (float)std::atof(word.c_str());
-				l_obj[i] = variable;
-				break;
-			}
-		}
-	}
-	for (int i = 0; i < obj.size(); i++) {
-
-		obj[i] = l_obj[i];
-	}
+float CsvLoader::getFloatValue(const std::string& tag, float defaultValue) const {
+    auto it = tagIndexMap.find(tag);
+    if (it != tagIndexMap.end()) {
+        auto& row = data[it->second];
+        if (row.size() >= 4 && !row[3].empty()) {
+            return std::stof(row[3]);
+        }
+    }
+    return defaultValue;
 }
 
-void LoadCSV::LoadCsvParam_Int(std::string FileName, std::vector<int>& obj, std::string LoadName) {
-	std::string line;
-	std::stringstream popcom;
-	std::ifstream file;
-
-	file.open(FileName);
-
-	popcom << file.rdbuf();
-
-	file.close();
-
-	std::vector<int>l_obj(obj.size());
-	for (int i = 0; i < obj.size(); i++) {
-		while (std::getline(popcom, line))
-		{
-			std::istringstream line_stream(line);
-			std::string word;
-			std::getline(line_stream, word, ',');
-
-			if (word.find("//") == 0)
-			{
-				continue;
-			}
-			if (word.find(LoadName) == 0)
-			{
-
-				std::getline(line_stream, word, ',');
-				int variable = (int)std::atof(word.c_str());
-				l_obj[i] = variable;
-				break;
-			}
-		}
-	}
-	for (int i = 0; i < obj.size(); i++) {
-
-		obj[i] = l_obj[i];
-	}
+std::string CsvLoader::getStringValue(const std::string& tag, const std::string& defaultValue) const {
+    auto it = tagIndexMap.find(tag);
+    if (it != tagIndexMap.end()) {
+        auto& row = data[it->second];
+        if (row.size() >= 5 && !row[4].empty()) {
+            return row[4];
+        }
+    }
+    return defaultValue;
 }

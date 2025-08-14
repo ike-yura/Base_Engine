@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Helper.h"
 #include "FPSManager.h"
+
 void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	dxCommon->SetFullScreen(true);
 	//共通の初期化
@@ -131,14 +132,14 @@ void FirstStageActor::Draw(DirectXCommon* dxCommon) {
 }
 //ポストエフェクトかからない
 void FirstStageActor::FrontDraw(DirectXCommon* dxCommon) {
-	ParticleEmitter::GetInstance()->FlontDrawAll();
+
 }
 //ポストエフェクトかかる
 void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	IKEObject3d::PreDraw();
 	ground->Draw();
 	skydome->Draw();
-	
+	ParticleEmitter::GetInstance()->FlontDrawAll();
 	Player::GetInstance()->Draw(dxCommon);
 	/*for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Draw(dxCommon);

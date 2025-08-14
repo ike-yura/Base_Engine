@@ -1,27 +1,21 @@
 #pragma once
-#include <any>
 #include <string>
-
-#include<fstream>
-#include<string>
-#include<sstream>
 #include <vector>
+#include <unordered_map>
 
-#include "DirectXMath.h"
-using namespace DirectX;
-namespace LoadCSV
-{
-	//CSV読み込み
-	//間接的にするやつ　この関数内で例外処理とかかける
-	void LoadCsvParam(std::string FileName,std::string LoadName,std::any&p );
+class CsvLoader {
+public:
+    CsvLoader(const std::string& filename);
 
-	//直接的にするやつ　コードが短くすむ・格納用の変数も必要ない
-	std::any LoadCsvParam(std::string FileName, std::string LoadName);
+    bool load();       // 初回読み込み
+    bool reload();     // 再読み込み
 
-	void LoadCsvParam_XMFLOAT3(std::string FileName, std::vector<XMFLOAT3>&obj,std::string LoadName);
-	void LoadCsvParam_String(std::string FileName, std::vector<std::string>& obj, std::string LoadName);
-	void LoadCsvParam_Float(std::string FileName, std::vector<float>& obj, std::string LoadName);
-	void LoadCsvParam_Int(std::string FileName, std::vector<int>& obj, std::string LoadName);
-}
+    int getIntValue(const std::string& tag, int defaultValue = 0) const;
+    float getFloatValue(const std::string& tag, float defaultValue = 0.0f) const;
+    std::string getStringValue(const std::string& tag, const std::string& defaultValue = "") const;
 
-
+private:
+    std::string filePath;  // 再読み込み用に保存
+    std::vector<std::vector<std::string>> data;
+    std::unordered_map<std::string, size_t> tagIndexMap; // タグのキャッシュ
+};

@@ -47,12 +47,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)lib\nlohmann;$(SolutionDir)imgui;$(ProjectDir)lib\DirectXTex\include;$(ProjectDir)lib\DXTK12_DIR\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(ProjectDir)lib\DirectXTex\lib\$(Configuration);$(ProjectDir)lib\DXTK12_DIR\lib\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(ProjectDir)lib\DirectXTex\lib\$(Configuration);$(ProjectDir)lib\DXTK12_DIR\lib\$(Configuration);$(ProjectDir)lib\xlnt\lib\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)lib\fbx_sdk\include;$(ProjectDir)lib\nlohmann;$(SolutionDir)imgui;$(ProjectDir)lib\DirectXTex\include;$(ProjectDir)lib\DXTK12_DIR\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(ProjectDir)lib\DirectXTex\lib\$(Configuration);$(ProjectDir)lib\DXTK12_DIR\lib\$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(ProjectDir)lib\DirectXTex\lib\$(Configuration);$(ProjectDir)lib\DXTK12_DIR\lib\$(Configuration);$(ProjectDir)lib\xlnt\lib\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
