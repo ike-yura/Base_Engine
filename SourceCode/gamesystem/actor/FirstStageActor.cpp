@@ -47,6 +47,7 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	ground->SetPosition({ 0.0f,-10.0f,0.0f });
 	ground->SetAddOffset(3.0f);
 	ground->VertexCheck();
+	ground->SetFog(true);
 
 	//スカイドーム
 	skydome.reset(new IKEObject3d());

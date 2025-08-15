@@ -47,6 +47,7 @@ public: // サブクラス
 		float pad;//パディング
 		XMFLOAT4 color;//色情報
 		float uvval;
+		bool Fog;//フォグ
 	};
 
 private: // 定数
