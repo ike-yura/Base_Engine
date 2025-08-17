@@ -25,6 +25,7 @@ void ObjCommon::Obj_SetParam()
 	m_Object->SetRotation(m_Rotation);
 	m_Object->SetScale(m_Scale);
 	m_Object->SetColor(m_Color);
+	m_Object->SetWireDraw(m_WireDraw);
 	m_Object->Update();
 	UpdateWorldMatrix();
 }

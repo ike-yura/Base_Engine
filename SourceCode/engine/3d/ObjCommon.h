@@ -54,6 +54,7 @@ public:
 	void SetRotation(const XMFLOAT3& rotation) { m_Rotation = rotation; }
 	void SetScale(const XMFLOAT3& scale) { m_Scale = scale; }
 	void SetColor(const XMFLOAT4& color) { m_Color = color; }
+	void SetWireDraw(const bool wiredraw) { m_WireDraw = wiredraw; }
 protected:
 	//共通変数(座標とか)
 	unique_ptr<IKEObject3d> m_Object;
@@ -72,6 +73,7 @@ protected:
 	XMFLOAT3 m_Scale = { 1.0f,1.0f,1.0f };
 	XMFLOAT4 m_Color = { 1.0f,1.0f,1.0f,1.0f };
 	XMFLOAT4 m_Addcolor = { 0.0f,0.0f,0.0f,1.0f };
+
 	//アニメーション関係
 	//アニメーション管理用
 	bool m_LoopFlag = true;
@@ -81,4 +83,5 @@ protected:
 	int m_AnimationType = 0;
 	bool m_ChangeColor = false;
 	float m_AddDisolve = 0.0f;
+	bool m_WireDraw = false;
 };

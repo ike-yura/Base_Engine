@@ -35,6 +35,8 @@ public: // サブクラス
 		ComPtr<ID3D12RootSignature> rootsignature;
 		// パイプラインステートオブジェクト
 		ComPtr<ID3D12PipelineState> pipelinestate;
+		// パイプラインステートオブジェクト
+		ComPtr<ID3D12PipelineState> wirepipelinestate;
 	};
 
 	// 定数バッファ用データ構造体B0
@@ -154,6 +156,7 @@ public: // メンバ関数
 	XMMATRIX GetMatrot() { return matRot; }
 	XMMATRIX GetMatScl() { return matScale; }
 
+	const bool GetWireDraw() { return wiredraw; }
 	/// <summary>
 /// モデルを取得
 /// </summary>
@@ -186,6 +189,8 @@ public: // メンバ関数
 	void SetModel(IKEModel* model) { this->model = model; }
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
+
+	void SetWireDraw(bool wiredraw) { this->wiredraw = wiredraw; }
 
 	const size_t& GetVertexNum() { return m_VertexNum; }
 	//当たり判定セット
@@ -277,7 +282,8 @@ protected: // メンバ変数
 	bool isBillboard = false;
 	//クラス名
 	const char* name = nullptr;
-
+	//ワイヤーフレームにするか
+	bool wiredraw = false;
 	//アフィン変換用
 	bool Affine = false;
 	//頂点の数
