@@ -1,5 +1,6 @@
 ﻿#include "TutorialSceneActor.h"
 #include "ImageManager.h"
+#include "Audio.h"
 #include "Helper.h"
 
 //初期化

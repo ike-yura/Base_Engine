@@ -63,11 +63,11 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	Player::GetInstance()->InitState({ 0.0f,-5.0f,0.0f });
 	Player::GetInstance()->Initialize();
 
-	////敵
-	//for (int i = 0; i < enemy.size(); i++) {
-	//	enemy[i].reset(new NormalEnemy());
-	//	enemy[i]->Initialize();
-	//}
+	//敵
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i].reset(new NormalEnemy());
+		enemy[i]->Initialize();
+	}
 
 	//テクスチャ
 	tex.reset(IKETexture::Create(ImageManager::MAGIC, { 0,0,0 }, { 0.5f,0.5f,0.5f }, { 1,1,1,1 }));
@@ -100,10 +100,10 @@ void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	ground->SetAddOffset(m_AddOffset.x);
 	Player::GetInstance()->Update();
 	ParticleEmitter::GetInstance()->Update();
-	/*
+	
 	for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Update();
-	}*/
+	}
 	tex->Update();
 }
 
@@ -140,11 +140,11 @@ void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	IKEObject3d::PreDraw();
 	ground->Draw();
 	skydome->Draw();
-	ParticleEmitter::GetInstance()->FlontDrawAll();
+	//ParticleEmitter::GetInstance()->FlontDrawAll();
 	Player::GetInstance()->Draw(dxCommon);
-	/*for (int i = 0; i < enemy.size(); i++) {
+	for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Draw(dxCommon);
-	}*/
+	}
 	IKEObject3d::PostDraw();
 
 	IKETexture::PreDraw2(dxCommon, AlphaBlendType);

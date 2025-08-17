@@ -15,8 +15,11 @@ Player* Player::GetInstance()
 void Player::LoadResource() {
 	m_Object.reset(new IKEObject3d());
 	m_Object->Initialize();
-	m_Object->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
-	m_Object->VertexCheck();
+	m_Object->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::PLAYERMODEL));
+
+	m_ColObject.reset(new IKEObject3d());
+	m_ColObject->Initialize();
+	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
 }
 //初期化
 bool Player::Initialize()
@@ -43,7 +46,8 @@ void Player::InitState(const XMFLOAT3& pos) {
 	m_Position = pos;
 	m_Rotation = { 0.0f,0.0f,0.0f };
 	m_Color = { 1.0f,1.0f,1.0f,1.0f };
-	m_WireDraw = true;
+	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f};
+	//m_WireDraw = true;
 	//移動処理用
 	velocity /= 5.0f;
 }
@@ -103,6 +107,7 @@ void Player::Update()
 
 	BirthParticle();
 	Obj_SetParam();
+	ColObj_SetParam();
 }
 //VECTOR
 XMFLOAT3 Player::MoveVECTOR(XMVECTOR v, float angle)

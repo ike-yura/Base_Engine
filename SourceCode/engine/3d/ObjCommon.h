@@ -5,9 +5,7 @@
 #include"IKEFBXModel.h"
 
 #include"DirectXCommon.h"
-#include"Audio.h"
 #include"ModelManager.h"
-#include"VolumManager.h"
 #include<memory>
 using namespace std;         //  名前空間指定
 
@@ -30,6 +28,7 @@ public:
 	virtual bool Initialize() = 0;
 	//ステータスセット
 	virtual void Obj_SetParam();
+	virtual void ColObj_SetParam();
 	virtual void FollowObj_SetParam(XMMATRIX matworld);
 	virtual void Fbx_SetParam();
 	//更新
@@ -46,6 +45,7 @@ public:
 	const XMFLOAT3& GetPosition() { return m_Position; }
 	const XMFLOAT3& GetRotation() { return m_Rotation; }
 	const XMFLOAT3& GetScale() { return m_Scale; }
+	const XMFLOAT3& GetColScale() { return m_ColScale; }
 	const XMFLOAT4& GetColor() { return m_Color; }
 	const XMMATRIX& GetMatRot() { return m_MatRot; }
 
@@ -53,12 +53,16 @@ public:
 	void SetPosition(const XMFLOAT3& position) { m_Position = position; }
 	void SetRotation(const XMFLOAT3& rotation) { m_Rotation = rotation; }
 	void SetScale(const XMFLOAT3& scale) { m_Scale = scale; }
+	void SetColScale(const XMFLOAT3& colscale) { m_ColScale = colscale; }
 	void SetColor(const XMFLOAT4& color) { m_Color = color; }
 	void SetWireDraw(const bool wiredraw) { m_WireDraw = wiredraw; }
 protected:
 	//共通変数(座標とか)
 	unique_ptr<IKEObject3d> m_Object;
 	IKEModel* m_Model;
+
+	unique_ptr<IKEObject3d> m_ColObject;
+	IKEModel* m_ColModel;
 
 	//共通変数(座標とか)
 	unique_ptr<IKEObject3d> m_FollowObject;
@@ -71,6 +75,7 @@ protected:
 	XMFLOAT3 m_Position = {0.0f,0.0f,0.0f};
 	XMFLOAT3 m_Rotation = { 0.0f,0.0f,0.0f };
 	XMFLOAT3 m_Scale = { 1.0f,1.0f,1.0f };
+	XMFLOAT3 m_ColScale = { 1.0f,1.0f,1.0f };
 	XMFLOAT4 m_Color = { 1.0f,1.0f,1.0f,1.0f };
 	XMFLOAT4 m_Addcolor = { 0.0f,0.0f,0.0f,1.0f };
 

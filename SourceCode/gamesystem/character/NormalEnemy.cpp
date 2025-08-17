@@ -19,13 +19,19 @@ bool NormalEnemy::Initialize() {
 	m_Object->SetPosition({ 0.0f,0.0f,20.0f });
 	m_Object->SetColor({ 1.0f,0.0f,0.0,1.0f });
 	m_Object->VertexCheck();
+
+	m_ColObject.reset(new IKEObject3d());
+	m_ColObject->Initialize();
+	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
+
 	m_Scale = { 0.5f,0.5f,0.5f };
 	m_Rotation = { 0.0f,90.0f,0.0f };
+	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f };
 
 	XMFLOAT3 m_RandPos = {};
-	m_RandPos.x = static_cast<float>(Helper::GetInstance()->GetRanNum(-15, 15));
-	m_RandPos.y = static_cast<float>(Helper::GetInstance()->GetRanNum(0, 20));
-	m_RandPos.z = static_cast<float>(Helper::GetInstance()->GetRanNum(-10, 20));
+	m_RandPos.x = static_cast<float>(Helper::GetInstance()->GetRanNum(-5, 5));
+	m_RandPos.y = -5.0f;
+	m_RandPos.z = static_cast<float>(Helper::GetInstance()->GetRanNum(-5, 5));
 	m_Position = m_RandPos;
 
 	return true;
@@ -43,6 +49,7 @@ void NormalEnemy::Action() {
 	(this->*stateTable[_charaState])();
 	m_Rotation.y += 2.0f;
 	Obj_SetParam();
+	ColObj_SetParam();
 }
 //•`‰æ
 void NormalEnemy::Draw(DirectXCommon* dxCommon) {

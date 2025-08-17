@@ -31,7 +31,7 @@ private:
 	unique_ptr<IKEObject3d> skydome;
 	XMFLOAT2 m_AddOffset = {};
 
-	array<unique_ptr<InterEnemy>,500> enemy;
+	array<unique_ptr<InterEnemy>,2> enemy;
 	unique_ptr<IKETexture> tex;
 };
 
