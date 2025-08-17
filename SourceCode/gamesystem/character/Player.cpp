@@ -15,9 +15,7 @@ Player* Player::GetInstance()
 void Player::LoadResource() {
 	m_Object.reset(new IKEObject3d());
 	m_Object->Initialize();
-	m_Object->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::PLAYERMODEL));
-	m_Object->SetScale({ 2.f,2.f,2.f });
-	m_Object->SetPosition({ 0.0f,0.0f,0.0f });
+	m_Object->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
 	m_Object->VertexCheck();
 }
 //初期化
