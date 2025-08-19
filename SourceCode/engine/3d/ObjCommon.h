@@ -45,6 +45,7 @@ public:
 	const XMFLOAT3& GetScale() { return m_Scale; }
 	const XMFLOAT3& GetColScale() { return m_ColScale; }
 	const XMFLOAT4& GetColor() { return m_Color; }
+	const XMFLOAT4& GetColColor() { return m_ColColor; }
 	const XMMATRIX& GetMatRot() { return m_MatRot; }
 
 
@@ -53,6 +54,7 @@ public:
 	void SetScale(const XMFLOAT3& scale) { m_Scale = scale; }
 	void SetColScale(const XMFLOAT3& colscale) { m_ColScale = colscale; }
 	void SetColor(const XMFLOAT4& color) { m_Color = color; }
+	void SetColColor(const XMFLOAT4& color) { m_ColColor = color; }
 	void SetWireDraw(const bool wiredraw) { m_WireDraw = wiredraw; }
 protected:
 	//共通変数(座標とか)
@@ -75,6 +77,7 @@ protected:
 	XMFLOAT3 m_Scale = { 1.0f,1.0f,1.0f };
 	XMFLOAT3 m_ColScale = { 1.0f,1.0f,1.0f };
 	XMFLOAT4 m_Color = { 1.0f,1.0f,1.0f,1.0f };
+	XMFLOAT4 m_ColColor = { 1.0f,1.0f,1.0f,1.0f };
 	XMFLOAT4 m_Addcolor = { 0.0f,0.0f,0.0f,1.0f };
 
 	//アニメーション関係

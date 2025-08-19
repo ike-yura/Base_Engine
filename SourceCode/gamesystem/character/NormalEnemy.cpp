@@ -48,6 +48,7 @@ void (NormalEnemy::* NormalEnemy::stateTable[])() = {
 void NormalEnemy::Action() {
 	(this->*stateTable[_charaState])();
 	m_Rotation.y += 2.0f;
+	PlayerCollide();
 	Obj_SetParam();
 	ColObj_SetParam();
 }
@@ -57,23 +58,8 @@ void NormalEnemy::Draw() {
 }
 //ImGui•`‰æ
 void NormalEnemy::ImGui_Origin() {
-	ImGui::Begin("Enemy");
-	if (ImGui::RadioButton("FOLLOW", &_charaState)) {
-		_charaState = STATE_FOLLOW;
-	}
-	else if (ImGui::RadioButton("CIRCLE", &_charaState)) {
-		m_StartPos = m_Position;
-		m_CircleScale = 0.0f;
-		m_CircleSpeed = 0.0f;
-		_charaState = STATE_CIRCLE;
-	}
-	else if (ImGui::RadioButton("SIN", &_charaState)) {
-		_charaState = STATE_SIN;
-	}
-	else if (ImGui::RadioButton("INTER", &_charaState)) {
-		_charaState = STATE_INTER;
-	}
-	ImGui::End();
+	ImGui::Checkbox("WireDraw", &m_WireDraw);
+	ImGui::Text("WireDraw:%d", m_WireDraw);
 }
 //ŠJ•ú
 void NormalEnemy::Finalize() {
@@ -85,7 +71,7 @@ void NormalEnemy::Follow() {
 }
 //‰~‰^“®
 void NormalEnemy::Circle() {
-
+	
 	m_CircleSpeed += 0.5f;
 	if (m_CircleScale < 7.0f) {
 		m_CircleScale += 0.3f;

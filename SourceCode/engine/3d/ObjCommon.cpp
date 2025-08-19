@@ -36,8 +36,7 @@ void ObjCommon::ColObj_SetParam()
 	m_ColObject->SetPosition(m_Position);
 	m_ColObject->SetRotation(m_Rotation);
 	m_ColObject->SetScale(m_ColScale);
-	m_ColObject->SetColor(m_Color);
-	m_WireDraw = true;
+	m_ColObject->SetColor(m_ColColor);
 	m_ColObject->SetWireDraw(m_WireDraw);
 	m_ColObject->Update();
 	UpdateWorldMatrix();

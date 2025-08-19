@@ -135,6 +135,7 @@ void Player::ImGuiDraw() {
 	if (ImGui::Button("reLoad", ImVec2(90, 50))) {
 		reLoadCSV();
 	}
+	ImGui::Checkbox("wireDraw", &m_WireDraw);
 	ImGui::End();
 }
 

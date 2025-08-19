@@ -31,4 +31,13 @@ void CharacterManager::Draw() {
 //Imgui
 void CharacterManager::ImguiDraw() {
 	Player::GetInstance()->ImGuiDraw();
+
+	//id‚ğ‚Â‚¯‚È‚«‚á‚¢‚¯‚È‚¢‚Ì‚ÅA‚±‚Ì‚â‚è•û‚É‚·‚é
+	ImGui::Begin("Enemy");
+	for (int i = 0; i < enemy.size(); i++) {
+		ImGui::PushID(i);
+		enemy[i]->ImGuiDraw();
+		ImGui::PopID();
+	}
+	ImGui::End();
 }
