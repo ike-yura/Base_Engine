@@ -171,6 +171,7 @@
     <ClCompile Include="SourceCode\gamesystem\actor\LoadSceneActor.cpp" />
     <ClCompile Include="SourceCode\gamesystem\actor\TitleSceneActor.cpp" />
     <ClCompile Include="SourceCode\gamesystem\actor\TutorialSceneActor.cpp" />
+    <ClCompile Include="SourceCode\gamesystem\character\CharacterManager.cpp" />
     <ClCompile Include="SourceCode\gamesystem\character\InterBoss.cpp" />
     <ClCompile Include="SourceCode\gamesystem\character\InterEnemy.cpp" />
     <ClCompile Include="SourceCode\gamesystem\character\NormalEnemy.cpp" />
@@ -267,6 +268,7 @@
     <ClInclude Include="SourceCode\gamesystem\actor\LoadSceneActor.h" />
     <ClInclude Include="SourceCode\gamesystem\actor\TitleSceneActor.h" />
     <ClInclude Include="SourceCode\gamesystem\actor\TutorialSceneActor.h" />
+    <ClInclude Include="SourceCode\gamesystem\character\CharacterManager.h" />
     <ClInclude Include="SourceCode\gamesystem\character\InterBoss.h" />
     <ClInclude Include="SourceCode\gamesystem\character\InterEnemy.h" />
     <ClInclude Include="SourceCode\gamesystem\character\NormalEnemy.h" />

@@ -36,7 +36,7 @@ public:
 	/// <summary>
 	/// •`‰æ
 	/// </summary>
-	virtual void Draw(DirectXCommon* dxCommon)override;
+	virtual void Draw()override;
 
 	void ImGuiDraw();
 

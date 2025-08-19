@@ -12,7 +12,7 @@ void InterEnemy::Update() {
 	Action();
 }
 //描画
-void InterEnemy::Draw(DirectXCommon* dxCommon) {
+void InterEnemy::Draw() {
 }
 
 void InterEnemy::ImGuiDraw() {

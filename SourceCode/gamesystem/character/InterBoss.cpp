@@ -10,5 +10,5 @@ void InterBoss::Update() {
 }
 
 //描画
-void InterBoss::Draw(DirectXCommon* dxCommon) {
+void InterBoss::Draw() {
 }

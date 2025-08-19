@@ -1,11 +1,7 @@
 ﻿#pragma once
 #include"BaseActor.h"
-#include"BossText.h"
 #include "MessageWindow.h"
-#include "NormalEnemy.h"
-#include<windows.h>
-#include<vector>
-#include <array>
+#include "CharacterManager.h"
 class FirstStageActor :public BaseActor
 {
 public:
@@ -30,8 +26,7 @@ private:
 	unique_ptr<IKEObject3d> ground;
 	unique_ptr<IKEObject3d> skydome;
 	XMFLOAT2 m_AddOffset = {};
-
-	array<unique_ptr<InterEnemy>,2> enemy;
+	unique_ptr<CharacterManager> charactermanager;
 	unique_ptr<IKETexture> tex;
 };
 

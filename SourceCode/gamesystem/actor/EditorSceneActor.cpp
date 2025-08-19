@@ -1,9 +1,8 @@
 ﻿#include "EditorSceneActor.h"
 #include "Audio.h"
 #include "SceneManager.h"
-#include "ModelManager.h"
-#include "VariableCommon.h"
 #include "ParticleEmitter.h"
+#include "VolumManager.h"
 
 //初期化
 void EditorSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup)

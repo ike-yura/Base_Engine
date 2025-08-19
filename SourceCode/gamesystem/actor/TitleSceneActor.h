@@ -1,9 +1,7 @@
 ﻿#pragma once
 #include "BaseActor.h"
-#include "Helper.h"
 #include "TitleText.h"
-#include <memory>
-#include"Font.h"
+
 /// タイトルシーン
 class TitleSceneActor : public BaseActor {
 public:

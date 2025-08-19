@@ -1,7 +1,4 @@
 ﻿#include "TitleSceneActor.h"
-#include "input.h"
-#include "ImageManager.h"
-#include "ParticleEmitter.h"
 #include "SceneManager.h"
 //初期化
 void TitleSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {

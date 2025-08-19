@@ -52,7 +52,7 @@ void NormalEnemy::Action() {
 	ColObj_SetParam();
 }
 //•`‰æ
-void NormalEnemy::Draw(DirectXCommon* dxCommon) {
+void NormalEnemy::Draw() {
 	Obj_Draw();
 }
 //ImGui•`‰æ

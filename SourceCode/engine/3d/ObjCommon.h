@@ -38,8 +38,6 @@ public:
 	virtual void FollowObj_Draw();
 	virtual void Fbx_Draw(DirectXCommon* dxCommon);
 
-	virtual void Draw(DirectXCommon* dxCommon) = 0;
-
 public:
 	//gettersetter
 	const XMFLOAT3& GetPosition() { return m_Position; }

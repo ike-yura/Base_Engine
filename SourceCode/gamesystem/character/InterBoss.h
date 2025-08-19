@@ -23,7 +23,7 @@ public:
 	//更新
 	void Update();
 	//描画
-	virtual void Draw(DirectXCommon* dxCommon)override;
+	virtual void Draw()override;
 
 	void ImGuiDraw();//ImGuiの描画
 

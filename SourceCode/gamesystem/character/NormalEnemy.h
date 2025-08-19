@@ -10,7 +10,7 @@ public:
 	void Action()override;//XV
 	void ImGui_Origin()override;
 
-	void Draw(DirectXCommon* dxCommon) override;//•`‰æ
+	void Draw() override;//•`‰æ
 private:
 	//ƒLƒƒƒ‰‚Ìó‘Ô
 	enum CharaState

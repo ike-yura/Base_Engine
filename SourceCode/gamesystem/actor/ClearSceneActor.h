@@ -1,6 +1,5 @@
 #pragma once
 #include "BaseActor.h"
-#include "IKESprite.h"
 /// クリアシーン
 class ClearSceneActor : public BaseActor {
 public:

@@ -119,7 +119,7 @@ XMFLOAT3 Player::MoveVECTOR(XMVECTOR v, float angle)
 	return pos;
 }
 //描画
-void Player::Draw(DirectXCommon* dxCommon)
+void Player::Draw()
 {
 	Obj_Draw();
 }
