@@ -111,16 +111,10 @@
     <ClCompile Include="SourceCode\engine\ease\Easing.cpp">
       <Filter>engine\ease</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\engine\collision\BaseCollider.cpp">
-      <Filter>engine\collision</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\engine\collision\Collision.cpp">
       <Filter>engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\engine\collision\CollisionInfo.cpp">
-      <Filter>engine\collision</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\engine\collision\CollisionManager.cpp">
       <Filter>engine\collision</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\engine\collision\CollisionPrimitive.cpp">
@@ -324,6 +318,15 @@
     <ClCompile Include="SourceCode\gamesystem\character\CharacterManager.cpp">
       <Filter>gamesystem\charactor\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\engine\collision\BaseCollider.cpp">
+      <Filter>engine\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\engine\collision\CollisionManager.cpp">
+      <Filter>engine\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\engine\collision\HitChecker.cpp">
+      <Filter>engine\collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\engine\camera\DebugCamera.h">
@@ -377,9 +380,6 @@
     <ClInclude Include="SourceCode\engine\ease\Easing.h">
       <Filter>engine\ease</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\engine\collision\BaseCollider.h">
-      <Filter>engine\collision</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\engine\collision\BlockCollision.h">
       <Filter>engine\collision</Filter>
     </ClInclude>
@@ -390,9 +390,6 @@
       <Filter>engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\engine\collision\CollisionInfo.h">
-      <Filter>engine\collision</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\engine\collision\CollisionManager.h">
       <Filter>engine\collision</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\engine\collision\CollisionPrimitive.h">
@@ -609,6 +606,18 @@
     </ClInclude>
     <ClInclude Include="SourceCode\gamesystem\character\CharacterManager.h">
       <Filter>gamesystem\charactor\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\collision\BaseCollider.h">
+      <Filter>engine\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\collision\CollisionManager.h">
+      <Filter>engine\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\collision\HitChecker.h">
+      <Filter>engine\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\collision\HitShape.h">
+      <Filter>engine\collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

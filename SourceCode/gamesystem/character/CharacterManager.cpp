@@ -1,5 +1,6 @@
 #include "CharacterManager.h"
 #include "Player.h"
+#include "HitChecker.h"
 //初期化
 void CharacterManager::Initialize() {
 	//プレイヤー
@@ -15,21 +16,38 @@ void CharacterManager::Initialize() {
 }
 //更新
 void CharacterManager::Update() {
-	Player::GetInstance()->Update();
-	bool l_Hit = false;
+	Player* player = Player::GetInstance();
+	player->Update();
+	// 敵の更新
 	for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Update();
-		if (enemy[i]->CheckHit()) { // 当たり判定だけ返す関数
-			l_Hit = true;
-		}
+	}
+	// HitChecker に登録
+	HitChecker hitChecker;
+	HitShape playerShape(HitShape::Type::Sphere); // プレイヤーは球
+	hitChecker.Register(player, &playerShape);
+
+	for (int i = 0; i < enemy.size(); i++) {
+		HitShape enemyShape(HitShape::Type::Sphere); // 敵は箱
+		hitChecker.Register(enemy[i].get(), &enemyShape);
 	}
 
-	//当たっているかどうかで色を変える
-	if (l_Hit) {
-		Player::GetInstance()->SetColColor({ 1.0f,0.0f,0.0f,1.0f });
+	// 当たり判定チェック
+	auto hits = hitChecker.CheckHits();
+	// 全体を一旦白に戻す
+	player->SetColColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->SetColColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 	}
-	else {
-		Player::GetInstance()->SetColColor({ 1.0f,1.0f,1.0f,1.0f });
+
+	// 衝突しているオブジェクトだけ赤にする
+	for (auto& pair : hits) {
+		ObjCommon* a = pair.first;
+		ObjCommon* b = pair.second;
+		if (a->GetWireDraw() && b->GetWireDraw()) {
+			a->SetColColor({ 1.0f, 0.0f, 0.0f, 1.0f });
+			b->SetColColor({ 1.0f, 0.0f, 0.0f, 1.0f });
+		}
 	}
 }
 //描画

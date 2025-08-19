@@ -19,10 +19,14 @@ void InterEnemy::ImGuiDraw() {
 	ImGui_Origin();
 }
 
-//プレイヤーがダメージ食らう
+//当たり判定
 bool InterEnemy::CheckHit() {
 	XMFLOAT3 l_PlayerPos = Player::GetInstance()->GetPosition();
-	if (Collision::SphereCollision(m_Position,m_ColScale.x, l_PlayerPos,Player::GetInstance()->GetColScale().x) && m_WireDraw && Player::GetInstance()->GetWireDraw()) {
+	float l_PlayerSca = Player::GetInstance()->GetColScale().x;
+	XMFLOAT3 l_emenymax = Helper::GetInstance()->GetAABBMax(m_Position,m_ColScale);
+	XMFLOAT3 l_emenymin = Helper::GetInstance()->GetAABBMin(m_Position, m_ColScale);
+
+	if (Collision::SphereAABBCollision(l_PlayerPos, l_PlayerSca,l_emenymin,l_emenymax) && m_WireDraw && Player::GetInstance()->GetWireDraw()) {
 		m_ColColor = { 1.0f,0.0f,0.0f,1.0f };
 		return true;
 	}

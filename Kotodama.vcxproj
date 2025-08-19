@@ -138,6 +138,7 @@
     <ClCompile Include="SourceCode\engine\collision\CollisionManager.cpp" />
     <ClCompile Include="SourceCode\engine\collision\CollisionPrimitive.cpp" />
     <ClCompile Include="SourceCode\engine\collision\CollisionTypes.cpp" />
+    <ClCompile Include="SourceCode\engine\collision\HitChecker.cpp" />
     <ClCompile Include="SourceCode\engine\collision\MeshCollider.cpp" />
     <ClCompile Include="SourceCode\engine\collision\SphereCollider.cpp" />
     <ClCompile Include="SourceCode\engine\collision\TouchableObject.cpp" />
@@ -230,6 +231,8 @@
     <ClInclude Include="SourceCode\engine\collision\CollisionManager.h" />
     <ClInclude Include="SourceCode\engine\collision\CollisionPrimitive.h" />
     <ClInclude Include="SourceCode\engine\collision\CollisionTypes.h" />
+    <ClInclude Include="SourceCode\engine\collision\HitChecker.h" />
+    <ClInclude Include="SourceCode\engine\collision\HitShape.h" />
     <ClInclude Include="SourceCode\engine\collision\MeshCollider.h" />
     <ClInclude Include="SourceCode\engine\collision\QueryCallback.h" />
     <ClInclude Include="SourceCode\engine\collision\RaycastHit.h" />

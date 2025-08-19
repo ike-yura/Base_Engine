@@ -108,6 +108,31 @@ bool Collision::SphereCollision(const XMFLOAT3& pos, const float& R1, const XMFL
 	return true;
 }
 
+//球とAABB
+bool Collision::SphereAABBCollision(const XMFLOAT3& sphereCenter,float sphereRadius,const XMFLOAT3& aabbMin,const XMFLOAT3& aabbMax){
+	// 中心をベクトル化
+	XMVECTOR center = XMLoadFloat3(&sphereCenter);
+	XMVECTOR minV = XMLoadFloat3(&aabbMin);
+	XMVECTOR maxV = XMLoadFloat3(&aabbMax);
+
+	// 最近接点 = clamp(center, min, max)
+	XMVECTOR closestPoint = XMVectorClamp(center, minV, maxV);
+
+	// 距離 = |center - closestPoint|
+	XMVECTOR diff = XMVectorSubtract(center, closestPoint);
+	float distSq = XMVectorGetX(XMVector3LengthSq(diff));
+
+	// 半径^2と比較
+	if (distSq <= (sphereRadius * sphereRadius)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+
+	return true;
+}
+
 bool Collision::CircleCollision(float X1, float Y1, float R1, float X2, float Y2, float R2) {
 	float a = X1 - X2;
 	float b = Y1 - Y2;

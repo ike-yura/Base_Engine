@@ -46,6 +46,9 @@ public:
 	XMFLOAT3 Float3SubFloat(const XMFLOAT3& Num, const float Sub);
 	//XMFLOAT3‚ÆXMFLOAT3‚ğŒ¸Z‚·‚éŠÖ”
 	XMFLOAT3 Float3SubFloat3(const XMFLOAT3& Num, const XMFLOAT3& Sub);
+	//À•W‚Æ‘å‚«‚³‚©‚çÅ‘å’l‚ÆÅ¬’l‚ğ‹‚ß‚éŠÖ”
+	XMFLOAT3 GetAABBMin(const XMFLOAT3& pos, const XMFLOAT3& scale);
+	XMFLOAT3 GetAABBMax(const XMFLOAT3& pos, const XMFLOAT3& scale);
 
 	//’Ç]ŠÖ”
 	void FollowMove(XMFLOAT3& pos, const XMFLOAT3& pos2, const float vel);

@@ -31,7 +31,7 @@ bool NormalEnemy::Initialize() {
 	XMFLOAT3 m_RandPos = {};
 	m_RandPos.x = static_cast<float>(Helper::GetInstance()->GetRanNum(-5, 5));
 	m_RandPos.y = -5.0f;
-	m_RandPos.z = static_cast<float>(Helper::GetInstance()->GetRanNum(-5, 5));
+	m_RandPos.z = 0.0f;
 	m_Position = m_RandPos;
 
 	return true;
