@@ -48,7 +48,6 @@ void (NormalEnemy::* NormalEnemy::stateTable[])() = {
 void NormalEnemy::Action() {
 	(this->*stateTable[_charaState])();
 	m_Rotation.y += 2.0f;
-	PlayerCollide();
 	Obj_SetParam();
 	ColObj_SetParam();
 }

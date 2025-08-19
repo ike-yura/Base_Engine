@@ -42,5 +42,5 @@ public:
 
 	virtual void ImGui_Origin() = 0;
 
-	void PlayerCollide();//プレイヤーがダメージを食らう当たり判定
+	bool CheckHit();//プレイヤーがダメージを食らう当たり判定
 };

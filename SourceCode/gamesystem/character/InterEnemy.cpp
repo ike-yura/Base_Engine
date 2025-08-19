@@ -20,16 +20,16 @@ void InterEnemy::ImGuiDraw() {
 }
 
 //プレイヤーがダメージ食らう
-void InterEnemy::PlayerCollide() {
+bool InterEnemy::CheckHit() {
 	XMFLOAT3 l_PlayerPos = Player::GetInstance()->GetPosition();
-	if (Collision::SphereCollision(m_Position,m_ColScale.x, l_PlayerPos,Player::GetInstance()->GetColScale().x)) {
-
+	if (Collision::SphereCollision(m_Position,m_ColScale.x, l_PlayerPos,Player::GetInstance()->GetColScale().x) && m_WireDraw && Player::GetInstance()->GetWireDraw()) {
 		m_ColColor = { 1.0f,0.0f,0.0f,1.0f };
-		Player::GetInstance()->SetColColor({ 1.0f,0.0f,0.0f,1.0f });
+		return true;
 	}
 	else {
 		m_ColColor = { 1.0f,1.0f,1.0f,1.0f };
-		Player::GetInstance()->SetColColor({ 1.0f,1.0f,1.0f,1.0f });
+		return false;
 	}
 
+	return false;
 }

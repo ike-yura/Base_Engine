@@ -16,9 +16,20 @@ void CharacterManager::Initialize() {
 //XV
 void CharacterManager::Update() {
 	Player::GetInstance()->Update();
-
+	bool l_Hit = false;
 	for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Update();
+		if (enemy[i]->CheckHit()) { // “–‚½‚è”»’è‚¾‚¯•Ô‚·ŠÖ”
+			l_Hit = true;
+		}
+	}
+
+	//“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ÅF‚ð•Ï‚¦‚é
+	if (l_Hit) {
+		Player::GetInstance()->SetColColor({ 1.0f,0.0f,0.0f,1.0f });
+	}
+	else {
+		Player::GetInstance()->SetColColor({ 1.0f,1.0f,1.0f,1.0f });
 	}
 }
 //•`‰æ

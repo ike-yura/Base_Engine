@@ -47,6 +47,7 @@ public:
 	const XMFLOAT4& GetColor() { return m_Color; }
 	const XMFLOAT4& GetColColor() { return m_ColColor; }
 	const XMMATRIX& GetMatRot() { return m_MatRot; }
+	const bool GetWireDraw() { return m_WireDraw; }
 
 
 	void SetPosition(const XMFLOAT3& position) { m_Position = position; }
