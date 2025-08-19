@@ -1,11 +1,5 @@
 #pragma once
-#include "DebugCamera.h"
-#include "LightGroup.h"
-#include "DirectXCommon.h"
-#include "PostEffect.h"
 #include "BaseActor.h"
-#include <vector>
-#include <memory>
 using namespace std;         //  –¼‘O‹óŠÔw’è
 //‘O•ûéŒ¾
 class SceneManager;

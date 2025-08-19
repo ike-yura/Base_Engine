@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include "IKETexture.h"
-#include "CollisionPrimitive.h"
 #include "ObjCommon.h"
 #include "InterEnemy.h"
 

@@ -1,8 +1,5 @@
 #include "BaseScene.h"
-#include "ImageManager.h"
-#include "VariableCommon.h"
 #include "ParticleEmitter.h"
-#include "Helper.h"
 
 //‹¤’Ê‚Ì‰Šú‰»
 void BaseScene::BaseInitialize(DirectXCommon* dxCommon) {

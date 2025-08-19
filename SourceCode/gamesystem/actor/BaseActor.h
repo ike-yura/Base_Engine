@@ -5,6 +5,7 @@
 #include "PostEffect.h"
 #include "CameraWork.h"
 #include "SceneChanger.h"
+#include "IKETexture.h"
 #include"Font.h"
 #include<SceneSave.h>
 
