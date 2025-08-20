@@ -1,6 +1,5 @@
 #pragma once
 #include "BaseActor.h"
-class LoadBox;
 
 /// タイトルシーン
 class EditorSceneActor : public BaseActor {

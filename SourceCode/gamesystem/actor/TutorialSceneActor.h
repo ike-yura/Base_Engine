@@ -1,9 +1,5 @@
 ﻿#pragma once
 #include "BaseActor.h"
-#include"TextManager.h"
-#include <random>
-#include <vector>
-#include <windows.h>
 
 /// タイトルシーン
 class TutorialSceneActor : public BaseActor {

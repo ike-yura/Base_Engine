@@ -12,9 +12,20 @@ void InterEnemy::Update() {
 	Action();
 }
 //描画
-void InterEnemy::Draw(DirectXCommon* dxCommon) {
+void InterEnemy::Draw() {
 }
 
 void InterEnemy::ImGuiDraw() {
 	ImGui_Origin();
+}
+
+void InterEnemy::ChangeShapeType() {
+	if (m_WireType == Sphere) {
+		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
+		m_HitShape = HitShape::Type::Sphere;
+	}
+	else {
+		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
+		m_HitShape = HitShape::Type::AABB;
+	}
 }

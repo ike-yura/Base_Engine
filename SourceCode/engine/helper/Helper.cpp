@@ -54,6 +54,24 @@ Helper::XMFLOAT3 Helper::Float3SubFloat3(const XMFLOAT3& Num, const XMFLOAT3& Su
 
 	return l_Result;
 }
+
+//AABB用の最大値と最小値
+Helper::XMFLOAT3 Helper::GetAABBMax(const XMFLOAT3& pos, const XMFLOAT3& scale) {
+	return {
+		pos.x + scale.x,
+		pos.y + scale.y,
+		pos.z + scale.z
+	};
+}
+
+Helper::XMFLOAT3 Helper::GetAABBMin(const XMFLOAT3& pos, const XMFLOAT3& scale) {
+	return {
+		pos.x - scale.x,
+		pos.y - scale.y,
+		pos.z - scale.z
+	};
+}
+
 //割合を返す
 float Helper::GetPercent(const float amount, const float num)
 {

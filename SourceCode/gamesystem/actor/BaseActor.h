@@ -3,10 +3,9 @@
 #include "DebugCamera.h"
 #include "DirectXCommon.h"
 #include "PostEffect.h"
-#include "ParticleManager.h"
-#include "VolumManager.h"
 #include "CameraWork.h"
 #include "SceneChanger.h"
+#include "IKETexture.h"
 #include"Font.h"
 #include<SceneSave.h>
 

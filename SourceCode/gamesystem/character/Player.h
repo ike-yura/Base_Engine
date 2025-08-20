@@ -17,7 +17,7 @@ public:
 	//更新
 	void Update()override;
 	//描画
-	void Draw(DirectXCommon* dxCommon)override;
+	void Draw()override;
 	//ImGui
 	void ImGuiDraw();
 	//パーティクル
@@ -25,6 +25,7 @@ public:
 	
 private:
 	XMFLOAT3 MoveVECTOR(XMVECTOR v, float angle);
+	void ChangeShapeType();
 private:
 	void LoadCSV();
 	void reLoadCSV();
@@ -41,4 +42,11 @@ private:
 
 private:
 	unique_ptr<CsvLoader> loader = nullptr;
+	enum WIreType
+	{
+		Sphere,
+		Box
+	};
+
+	int m_WireType = Sphere;
 };

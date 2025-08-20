@@ -1,9 +1,4 @@
 #include "ClearSceneActor.h"
-#include "SceneManager.h"
-#include <Easing.h>
-#include "ImageManager.h"
-#include "VariableCommon.h"
-#include "Audio.h"
 //‰Šú‰»
 void ClearSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//‹¤’Ê‚Ì‰Šú‰»

@@ -1,9 +1,7 @@
 #include "GameOverSceneActor.h"
 #include "SceneManager.h"
-#include <Easing.h>
-#include "ImageManager.h"
-#include "VariableCommon.h"
 #include "Audio.h"
+#include "VolumManager.h"
 //‰Šú‰»
 void GameOverSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//‹¤’Ê‚Ì‰Šú‰»

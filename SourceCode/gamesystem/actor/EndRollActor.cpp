@@ -1,9 +1,7 @@
 #include "EndRollActor.h"
 #include "SceneManager.h"
-#include <Easing.h>
-#include "ImageManager.h"
 #include "Audio.h"
-#include "Helper.h"
+#include "VolumManager.h"
 //‰Šú‰»
 void EndRollActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//‹¤’Ê‚Ì‰Šú‰»

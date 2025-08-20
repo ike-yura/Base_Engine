@@ -17,6 +17,8 @@ public:
 		GROUND,
 		PLAYERMODEL,
 		SKYDOME,
+		SPHERE,
+		BOX,
 	};
 	//FBXの名前
 	enum FBXName {

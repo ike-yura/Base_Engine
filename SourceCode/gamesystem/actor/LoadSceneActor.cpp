@@ -1,7 +1,5 @@
 ﻿#include "LoadSceneActor.h"
-#include "ImageManager.h"
-#include "Easing.h"
-#include "Helper.h"
+
 //初期化
 void LoadSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 

@@ -1,6 +1,6 @@
 ﻿#include "TutorialSceneActor.h"
-#include "ImageManager.h"
-#include "Helper.h"
+#include "Audio.h"
+#include "VolumManager.h"
 
 //初期化
 void TutorialSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {

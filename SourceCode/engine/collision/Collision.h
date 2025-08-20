@@ -32,6 +32,10 @@ public:
 	//ìñÇΩÇËîªíËä÷êî
 	//ãÖÇ∆ãÖ
 	static bool SphereCollision(const XMFLOAT3& pos, const float& R1, const XMFLOAT3& pos2, const float& R2);
+	//ãÖÇ∆AABB
+	static bool SphereAABBCollision(const XMFLOAT3& sphereCenter, float sphereRadius, const XMFLOAT3& aabbMin, const XMFLOAT3& aabbMax);
+	//AABB
+	static bool AABBCollision(const XMFLOAT3& minA, const XMFLOAT3& maxA, const XMFLOAT3& minB, const XMFLOAT3& maxB);
 	//ãÖÇ∆ãÖ2
 	static bool CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter = nullptr, DirectX::XMVECTOR* reject = nullptr);
 	//ïΩñ Ç∆ãÖ

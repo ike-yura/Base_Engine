@@ -16,9 +16,10 @@ void Player::LoadResource() {
 	m_Object.reset(new IKEObject3d());
 	m_Object->Initialize();
 	m_Object->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::PLAYERMODEL));
-	m_Object->SetScale({ 2.f,2.f,2.f });
-	m_Object->SetPosition({ 0.0f,0.0f,0.0f });
-	m_Object->VertexCheck();
+
+	m_ColObject.reset(new IKEObject3d());
+	m_ColObject->Initialize();
+	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
 }
 //初期化
 bool Player::Initialize()
@@ -45,8 +46,12 @@ void Player::InitState(const XMFLOAT3& pos) {
 	m_Position = pos;
 	m_Rotation = { 0.0f,0.0f,0.0f };
 	m_Color = { 1.0f,1.0f,1.0f,1.0f };
+	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f};
+	//m_WireDraw = true;
 	//移動処理用
 	velocity /= 5.0f;
+	m_WireType = WIreType::Box;
+	m_HitShape = HitShape::Type::AABB;
 }
 
 //更新処理
@@ -104,6 +109,7 @@ void Player::Update()
 
 	BirthParticle();
 	Obj_SetParam();
+	ColObj_SetParam();
 }
 //VECTOR
 XMFLOAT3 Player::MoveVECTOR(XMVECTOR v, float angle)
@@ -115,7 +121,7 @@ XMFLOAT3 Player::MoveVECTOR(XMVECTOR v, float angle)
 	return pos;
 }
 //描画
-void Player::Draw(DirectXCommon* dxCommon)
+void Player::Draw()
 {
 	Obj_Draw();
 }
@@ -123,14 +129,15 @@ void Player::Draw(DirectXCommon* dxCommon)
 //ImGui
 void Player::ImGuiDraw() {
 	ImGui::Begin("Player");
-	ImGui::Text("AddPower:%f", m_AddSpeed);
-	ImGui::Text("RotX:%f", m_Rotation.y);
-	ImGui::Text("PosX:%f", m_Position.x);
-	ImGui::Text("PosZ:%f", m_Position.z);
 	ImGui::Text("HP:%d", m_HP);
 	if (ImGui::Button("reLoad", ImVec2(90, 50))) {
 		reLoadCSV();
 	}
+	ImGui::RadioButton("Sphere", &m_WireType,Sphere); ImGui::SameLine(); ImGui::RadioButton("Box", &m_WireType, Box);
+	if (ImGui::Button("modelChange", ImVec2(90, 50))) {
+		ChangeShapeType();
+	}
+	ImGui::Checkbox("wireDraw", &m_WireDraw);
 	ImGui::End();
 }
 
@@ -141,4 +148,15 @@ void Player::BirthParticle() {
 	float e_scale = 0.0f;
 
 	ParticleEmitter::GetInstance()->FireEffect(50, { m_Position.x,m_Position.y + 2.0f,m_Position.z }, s_scale, e_scale, s_color, e_color);
+}
+
+void Player::ChangeShapeType() {
+	if (m_WireType == Sphere) {
+		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
+		m_HitShape = HitShape::Type::Sphere;
+	}
+	else {
+		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
+		m_HitShape = HitShape::Type::AABB;
+	}
 }

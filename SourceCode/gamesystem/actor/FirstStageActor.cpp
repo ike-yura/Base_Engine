@@ -1,9 +1,6 @@
 ﻿#include "FirstStageActor.h"
-#include"Easing.h"
 #include "ParticleEmitter.h"
 #include "ImageManager.h"
-#include "Player.h"
-#include "Helper.h"
 #include "FPSManager.h"
 
 void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
@@ -58,23 +55,15 @@ void FirstStageActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	skydome->SetPosition({ 0.0f,0.0f,0.0f });
 	skydome->VertexCheck();
 
-	//プレイヤー
-	Player::GetInstance()->LoadResource();
-	Player::GetInstance()->InitState({ 0.0f,-5.0f,0.0f });
-	Player::GetInstance()->Initialize();
-
-	////敵
-	//for (int i = 0; i < enemy.size(); i++) {
-	//	enemy[i].reset(new NormalEnemy());
-	//	enemy[i]->Initialize();
-	//}
-
 	//テクスチャ
 	tex.reset(IKETexture::Create(ImageManager::MAGIC, { 0,0,0 }, { 0.5f,0.5f,0.5f }, { 1,1,1,1 }));
 	tex->TextureCreate();
 	tex->SetPosition({ 5.0f,2.0f,0.0f });
 	tex->SetScale({ 0.5f,0.5f,0.5f });
 	tex->SetIsBillboard(true);
+
+	charactermanager.reset(new CharacterManager());
+	charactermanager->Initialize();
 	//tex->SetColor({ 1.0f,0.0,0.0f,1.0f });
 }
 
@@ -89,21 +78,13 @@ void FirstStageActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	camerawork->Update(camera);
 
 	//プレイヤー
-	lightgroup->SetCircleShadowDir(0, XMVECTOR({ circleShadowDir[0], circleShadowDir[1], circleShadowDir[2], 0 }));
-	lightgroup->SetCircleShadowCasterPos(0, XMFLOAT3({ Player::GetInstance()->GetPosition().x, 0.0f, Player::GetInstance()->GetPosition().z }));
-	lightgroup->SetCircleShadowAtten(0, XMFLOAT3(circleShadowAtten));
-	lightgroup->SetCircleShadowFactorAngle(0, XMFLOAT2(circleShadowFactorAngle));
 	lightgroup->Update();
 	ground->Update();
 	skydome->Update();
 	m_AddOffset.x = 0.001f;
 	ground->SetAddOffset(m_AddOffset.x);
-	Player::GetInstance()->Update();
 	ParticleEmitter::GetInstance()->Update();
-	/*
-	for (int i = 0; i < enemy.size(); i++) {
-		enemy[i]->Update();
-	}*/
+	charactermanager->Update();
 	tex->Update();
 }
 
@@ -140,11 +121,8 @@ void FirstStageActor::BackDraw(DirectXCommon* dxCommon) {
 	IKEObject3d::PreDraw();
 	ground->Draw();
 	skydome->Draw();
-	ParticleEmitter::GetInstance()->FlontDrawAll();
-	Player::GetInstance()->Draw(dxCommon);
-	/*for (int i = 0; i < enemy.size(); i++) {
-		enemy[i]->Draw(dxCommon);
-	}*/
+	//ParticleEmitter::GetInstance()->FlontDrawAll();
+	charactermanager->Draw();
 	IKEObject3d::PostDraw();
 
 	IKETexture::PreDraw2(dxCommon, AlphaBlendType);
@@ -165,11 +143,6 @@ void FirstStageActor::FinishUpdate(DebugCamera* camera) {
 }
 
 void FirstStageActor::ImGuiDraw() {
-	ImGui::Begin("FIRST");
-	ImGui::Text("GroundNum:%d",ground->GetVertexNum());
-	ImGui::Text("SkydomeNum:%d", skydome->GetVertexNum());
-	ImGui::End();
-
-	Player::GetInstance()->ImGuiDraw();
+	charactermanager->ImguiDraw();
 	FPSManager::GetInstance()->ImGuiDraw();
 }

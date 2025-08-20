@@ -25,11 +25,24 @@ void ObjCommon::Obj_SetParam()
 	m_Object->SetRotation(m_Rotation);
 	m_Object->SetScale(m_Scale);
 	m_Object->SetColor(m_Color);
+	m_Object->SetWireDraw(false);
 	m_Object->Update();
 	UpdateWorldMatrix();
 }
 
-//オブジェクトのセット
+//当たり判定用OBJのセット
+void ObjCommon::ColObj_SetParam()
+{
+	m_ColObject->SetPosition(m_Position);
+	m_ColObject->SetRotation(m_Rotation);
+	m_ColObject->SetScale(m_ColScale);
+	m_ColObject->SetColor(m_ColColor);
+	m_ColObject->SetWireDraw(m_WireDraw);
+	m_ColObject->Update();
+	UpdateWorldMatrix();
+}
+
+//オブジェクトのセット(追従)
 void ObjCommon::FollowObj_SetParam(XMMATRIX matworld)
 {
 	m_FollowObject->SetAddColor(m_Addcolor);
@@ -52,6 +65,8 @@ void ObjCommon::Obj_Draw()
 {
 	PreDraw();
 	m_Object->Draw();
+	if (m_WireDraw)
+		m_ColObject->Draw();
 	PostDraw();
 }
 

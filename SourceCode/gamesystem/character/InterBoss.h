@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include "IKETexture.h"
-#include "CollisionPrimitive.h"
 #include "ObjCommon.h"
 #include "InterEnemy.h"
 
@@ -23,7 +21,7 @@ public:
 	//更新
 	void Update();
 	//描画
-	virtual void Draw(DirectXCommon* dxCommon)override;
+	virtual void Draw()override;
 
 	void ImGuiDraw();//ImGuiの描画
 

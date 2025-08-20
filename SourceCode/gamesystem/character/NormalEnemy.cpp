@@ -19,15 +19,22 @@ bool NormalEnemy::Initialize() {
 	m_Object->SetPosition({ 0.0f,0.0f,20.0f });
 	m_Object->SetColor({ 1.0f,0.0f,0.0,1.0f });
 	m_Object->VertexCheck();
-	m_Scale = { 0.5f,0.5f,0.5f };
-	m_Rotation = { 0.0f,90.0f,0.0f };
+
+	m_ColObject.reset(new IKEObject3d());
+	m_ColObject->Initialize();
+	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
+
+	m_Scale = { 1.5f,0.5f,0.5f };
+	m_Rotation = { 0.0f,0.0f,0.0f };
+	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f };
 
 	XMFLOAT3 m_RandPos = {};
-	m_RandPos.x = static_cast<float>(Helper::GetInstance()->GetRanNum(-15, 15));
-	m_RandPos.y = static_cast<float>(Helper::GetInstance()->GetRanNum(0, 20));
-	m_RandPos.z = static_cast<float>(Helper::GetInstance()->GetRanNum(-10, 20));
+	m_RandPos.x = static_cast<float>(Helper::GetInstance()->GetRanNum(-5, 5));
+	m_RandPos.y = -5.0f;
+	m_RandPos.z = 0.0f;
 	m_Position = m_RandPos;
-
+	m_WireType = WIreType::Box;
+	m_HitShape = HitShape::Type::AABB;
 	return true;
 }
 
@@ -41,32 +48,22 @@ void (NormalEnemy::* NormalEnemy::stateTable[])() = {
 //s“®
 void NormalEnemy::Action() {
 	(this->*stateTable[_charaState])();
-	m_Rotation.y += 2.0f;
+	
 	Obj_SetParam();
+	ColObj_SetParam();
 }
 //•`‰æ
-void NormalEnemy::Draw(DirectXCommon* dxCommon) {
+void NormalEnemy::Draw() {
 	Obj_Draw();
 }
 //ImGui•`‰æ
 void NormalEnemy::ImGui_Origin() {
-	ImGui::Begin("Enemy");
-	if (ImGui::RadioButton("FOLLOW", &_charaState)) {
-		_charaState = STATE_FOLLOW;
+	ImGui::Checkbox("WireDraw", &m_WireDraw);
+	ImGui::RadioButton("Sphere", &m_WireType, Sphere); ImGui::SameLine(); ImGui::RadioButton("Box", &m_WireType, Box);
+	if (ImGui::Button("modelChange", ImVec2(90, 50))) {
+		ChangeShapeType();
 	}
-	else if (ImGui::RadioButton("CIRCLE", &_charaState)) {
-		m_StartPos = m_Position;
-		m_CircleScale = 0.0f;
-		m_CircleSpeed = 0.0f;
-		_charaState = STATE_CIRCLE;
-	}
-	else if (ImGui::RadioButton("SIN", &_charaState)) {
-		_charaState = STATE_SIN;
-	}
-	else if (ImGui::RadioButton("INTER", &_charaState)) {
-		_charaState = STATE_INTER;
-	}
-	ImGui::End();
+	ImGui::Text("WireDraw:%d", m_WireDraw);
 }
 //ŠJ•ú
 void NormalEnemy::Finalize() {
@@ -78,7 +75,7 @@ void NormalEnemy::Follow() {
 }
 //‰~‰^“®
 void NormalEnemy::Circle() {
-
+	
 	m_CircleSpeed += 0.5f;
 	if (m_CircleScale < 7.0f) {
 		m_CircleScale += 0.3f;

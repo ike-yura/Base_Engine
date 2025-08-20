@@ -5,9 +5,8 @@
 #include"IKEFBXModel.h"
 
 #include"DirectXCommon.h"
-#include"Audio.h"
 #include"ModelManager.h"
-#include"VolumManager.h"
+#include "HitShape.h"
 #include<memory>
 using namespace std;         //  名前空間指定
 
@@ -30,6 +29,7 @@ public:
 	virtual bool Initialize() = 0;
 	//ステータスセット
 	virtual void Obj_SetParam();
+	virtual void ColObj_SetParam();
 	virtual void FollowObj_SetParam(XMMATRIX matworld);
 	virtual void Fbx_SetParam();
 	//更新
@@ -39,25 +39,36 @@ public:
 	virtual void FollowObj_Draw();
 	virtual void Fbx_Draw(DirectXCommon* dxCommon);
 
-	virtual void Draw(DirectXCommon* dxCommon) = 0;
-
 public:
 	//gettersetter
 	const XMFLOAT3& GetPosition() { return m_Position; }
 	const XMFLOAT3& GetRotation() { return m_Rotation; }
 	const XMFLOAT3& GetScale() { return m_Scale; }
+	const XMFLOAT3& GetColScale() { return m_ColScale; }
 	const XMFLOAT4& GetColor() { return m_Color; }
+	const XMFLOAT4& GetColColor() { return m_ColColor; }
 	const XMMATRIX& GetMatRot() { return m_MatRot; }
+	const bool GetWireDraw() { return m_WireDraw; }
+	HitShape& GetHitShape() { return m_HitShape; }
+	const HitShape& GetHitShape() const { return m_HitShape; }
 
+	void SetHitShapeType(HitShape::Type type) { m_HitShape.SetType(type); }
+	HitShape::Type GetHitShapeType() const { return m_HitShape.GetType(); }
 
 	void SetPosition(const XMFLOAT3& position) { m_Position = position; }
 	void SetRotation(const XMFLOAT3& rotation) { m_Rotation = rotation; }
 	void SetScale(const XMFLOAT3& scale) { m_Scale = scale; }
+	void SetColScale(const XMFLOAT3& colscale) { m_ColScale = colscale; }
 	void SetColor(const XMFLOAT4& color) { m_Color = color; }
+	void SetColColor(const XMFLOAT4& color) { m_ColColor = color; }
+	void SetWireDraw(const bool wiredraw) { m_WireDraw = wiredraw; }
 protected:
 	//共通変数(座標とか)
 	unique_ptr<IKEObject3d> m_Object;
 	IKEModel* m_Model;
+
+	unique_ptr<IKEObject3d> m_ColObject;
+	IKEModel* m_ColModel;
 
 	//共通変数(座標とか)
 	unique_ptr<IKEObject3d> m_FollowObject;
@@ -70,8 +81,11 @@ protected:
 	XMFLOAT3 m_Position = {0.0f,0.0f,0.0f};
 	XMFLOAT3 m_Rotation = { 0.0f,0.0f,0.0f };
 	XMFLOAT3 m_Scale = { 1.0f,1.0f,1.0f };
+	XMFLOAT3 m_ColScale = { 1.0f,1.0f,1.0f };
 	XMFLOAT4 m_Color = { 1.0f,1.0f,1.0f,1.0f };
+	XMFLOAT4 m_ColColor = { 1.0f,1.0f,1.0f,1.0f };
 	XMFLOAT4 m_Addcolor = { 0.0f,0.0f,0.0f,1.0f };
+
 	//アニメーション関係
 	//アニメーション管理用
 	bool m_LoopFlag = true;
@@ -81,4 +95,7 @@ protected:
 	int m_AnimationType = 0;
 	bool m_ChangeColor = false;
 	float m_AddDisolve = 0.0f;
+	bool m_WireDraw = false;
+
+	HitShape m_HitShape;
 };
