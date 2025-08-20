@@ -30,6 +30,7 @@ std::vector<std::pair<ObjCommon*, ObjCommon*>> HitChecker::CheckHits() {
             // Sphere-Sphere
             if (aShape->GetType() == HitShape::Type::Sphere &&
                 bShape->GetType() == HitShape::Type::Sphere) {
+
                 hit = Collision::SphereCollision(
                     aObj->GetPosition(), aObj->GetColScale().x,
                     bObj->GetPosition(), bObj->GetColScale().x);
@@ -37,7 +38,6 @@ std::vector<std::pair<ObjCommon*, ObjCommon*>> HitChecker::CheckHits() {
             // Sphere-AABB
             else if ((aShape->GetType() == HitShape::Type::Sphere && bShape->GetType() == HitShape::Type::AABB) ||
                 (aShape->GetType() == HitShape::Type::AABB && bShape->GetType() == HitShape::Type::Sphere)) {
-
                 ObjCommon* sphereObj = (aShape->GetType() == HitShape::Type::Sphere) ? aObj : bObj;
                 ObjCommon* aabbObj = (aShape->GetType() == HitShape::Type::AABB) ? aObj : bObj;
 

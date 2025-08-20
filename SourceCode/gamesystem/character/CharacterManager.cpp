@@ -24,12 +24,12 @@ void CharacterManager::Update() {
 	}
 	// HitChecker に登録
 	HitChecker hitChecker;
-	HitShape playerShape(HitShape::Type::AABB); // プレイヤーは球
-	hitChecker.Register(player, &playerShape);
+	// プレイヤー
+	hitChecker.Register(player, &player->GetHitShape());
 
+	// 敵
 	for (int i = 0; i < enemy.size(); i++) {
-		HitShape enemyShape(HitShape::Type::AABB); // 敵は箱
-		hitChecker.Register(enemy[i].get(), &enemyShape);
+		hitChecker.Register(enemy[i].get(), &enemy[i]->GetHitShape());
 	}
 
 	// 当たり判定チェック

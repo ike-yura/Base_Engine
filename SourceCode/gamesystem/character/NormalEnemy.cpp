@@ -34,7 +34,7 @@ bool NormalEnemy::Initialize() {
 	m_RandPos.z = 0.0f;
 	m_Position = m_RandPos;
 	m_WireType = WIreType::Box;
-
+	m_HitShape = HitShape::Type::AABB;
 	return true;
 }
 

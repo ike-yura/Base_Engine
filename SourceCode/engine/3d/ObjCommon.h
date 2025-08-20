@@ -6,6 +6,7 @@
 
 #include"DirectXCommon.h"
 #include"ModelManager.h"
+#include "HitShape.h"
 #include<memory>
 using namespace std;         //  –¼‘O‹óŠÔŽw’è
 
@@ -48,7 +49,11 @@ public:
 	const XMFLOAT4& GetColColor() { return m_ColColor; }
 	const XMMATRIX& GetMatRot() { return m_MatRot; }
 	const bool GetWireDraw() { return m_WireDraw; }
+	HitShape& GetHitShape() { return m_HitShape; }
+	const HitShape& GetHitShape() const { return m_HitShape; }
 
+	void SetHitShapeType(HitShape::Type type) { m_HitShape.SetType(type); }
+	HitShape::Type GetHitShapeType() const { return m_HitShape.GetType(); }
 
 	void SetPosition(const XMFLOAT3& position) { m_Position = position; }
 	void SetRotation(const XMFLOAT3& rotation) { m_Rotation = rotation; }
@@ -91,4 +96,6 @@ protected:
 	bool m_ChangeColor = false;
 	float m_AddDisolve = 0.0f;
 	bool m_WireDraw = false;
+
+	HitShape m_HitShape;
 };

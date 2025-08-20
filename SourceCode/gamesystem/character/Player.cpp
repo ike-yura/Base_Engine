@@ -51,6 +51,7 @@ void Player::InitState(const XMFLOAT3& pos) {
 	//移動処理用
 	velocity /= 5.0f;
 	m_WireType = WIreType::Box;
+	m_HitShape = HitShape::Type::AABB;
 }
 
 //更新処理
@@ -152,8 +153,10 @@ void Player::BirthParticle() {
 void Player::ChangeShapeType() {
 	if (m_WireType == Sphere) {
 		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
+		m_HitShape = HitShape::Type::Sphere;
 	}
 	else {
 		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
+		m_HitShape = HitShape::Type::AABB;
 	}
 }
