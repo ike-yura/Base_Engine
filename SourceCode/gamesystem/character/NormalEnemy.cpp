@@ -22,10 +22,10 @@ bool NormalEnemy::Initialize() {
 
 	m_ColObject.reset(new IKEObject3d());
 	m_ColObject->Initialize();
-	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
+	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
 
-	m_Scale = { 0.5f,0.5f,0.5f };
-	m_Rotation = { 0.0f,90.0f,0.0f };
+	m_Scale = { 1.5f,0.5f,0.5f };
+	m_Rotation = { 0.0f,0.0f,0.0f };
 	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f };
 
 	XMFLOAT3 m_RandPos = {};
@@ -47,7 +47,7 @@ void (NormalEnemy::* NormalEnemy::stateTable[])() = {
 //s“®
 void NormalEnemy::Action() {
 	(this->*stateTable[_charaState])();
-	m_Rotation.y += 2.0f;
+	
 	Obj_SetParam();
 	ColObj_SetParam();
 }

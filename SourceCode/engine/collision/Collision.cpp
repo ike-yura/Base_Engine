@@ -133,6 +133,22 @@ bool Collision::SphereAABBCollision(const XMFLOAT3& sphereCenter,float sphereRad
 	return true;
 }
 
+//AABB
+bool Collision::AABBCollision(const XMFLOAT3& minA, const XMFLOAT3& maxA, const XMFLOAT3& minB, const XMFLOAT3& maxB) {
+	// X²•ûŒü‚Å•ª—£‚µ‚Ä‚¢‚È‚¢‚©
+	if (maxA.x < minB.x || minA.x > maxB.x)
+		return false;
+	// Y²•ûŒü‚Å•ª—£‚µ‚Ä‚¢‚È‚¢‚©
+	if (maxA.y < minB.y || minA.y > maxB.y)
+		return false;
+	// Z²•ûŒü‚Å•ª—£‚µ‚Ä‚¢‚È‚¢‚©
+	if (maxA.z < minB.z || minA.z > maxB.z)
+		return false;
+
+	// ‚Ç‚Ì²‚Å‚à•ª—£‚µ‚Ä‚¢‚È‚¢ ¨ “–‚½‚Á‚Ä‚¢‚é
+	return true;
+}
+
 bool Collision::CircleCollision(float X1, float Y1, float R1, float X2, float Y2, float R2) {
 	float a = X1 - X2;
 	float b = Y1 - Y2;

@@ -24,11 +24,11 @@ void CharacterManager::Update() {
 	}
 	// HitChecker ‚É“o˜^
 	HitChecker hitChecker;
-	HitShape playerShape(HitShape::Type::Sphere); // ƒvƒŒƒCƒ„[‚Í‹…
+	HitShape playerShape(HitShape::Type::AABB); // ƒvƒŒƒCƒ„[‚Í‹…
 	hitChecker.Register(player, &playerShape);
 
 	for (int i = 0; i < enemy.size(); i++) {
-		HitShape enemyShape(HitShape::Type::Sphere); // “G‚Í” 
+		HitShape enemyShape(HitShape::Type::AABB); // “G‚Í” 
 		hitChecker.Register(enemy[i].get(), &enemyShape);
 	}
 

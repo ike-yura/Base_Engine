@@ -2,7 +2,11 @@
 
 class HitShape {
 public:
-    enum class Type { Sphere, AABB };
+    enum class Type
+    { 
+      Sphere, 
+      AABB 
+    };
 
 private:
     Type m_Type;

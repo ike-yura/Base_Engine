@@ -19,7 +19,7 @@ void Player::LoadResource() {
 
 	m_ColObject.reset(new IKEObject3d());
 	m_ColObject->Initialize();
-	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
+	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
 }
 //初期化
 bool Player::Initialize()
