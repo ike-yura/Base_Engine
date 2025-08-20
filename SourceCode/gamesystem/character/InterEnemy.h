@@ -14,7 +14,13 @@ protected:
 public://getter setter
 
 protected:
+	enum WIreType
+	{
+		Sphere,
+		Box
+	};
 
+	int m_WireType = Sphere;
 public:
 	//virtual ~InterEnemy() = default;
 
@@ -42,5 +48,5 @@ public:
 
 	virtual void ImGui_Origin() = 0;
 
-	bool CheckHit();//プレイヤーがダメージを食らう当たり判定
+	void ChangeShapeType();
 };

@@ -33,6 +33,7 @@ bool NormalEnemy::Initialize() {
 	m_RandPos.y = -5.0f;
 	m_RandPos.z = 0.0f;
 	m_Position = m_RandPos;
+	m_WireType = WIreType::Box;
 
 	return true;
 }
@@ -58,6 +59,10 @@ void NormalEnemy::Draw() {
 //ImGui•`‰æ
 void NormalEnemy::ImGui_Origin() {
 	ImGui::Checkbox("WireDraw", &m_WireDraw);
+	ImGui::RadioButton("Sphere", &m_WireType, Sphere); ImGui::SameLine(); ImGui::RadioButton("Box", &m_WireType, Box);
+	if (ImGui::Button("modelChange", ImVec2(90, 50))) {
+		ChangeShapeType();
+	}
 	ImGui::Text("WireDraw:%d", m_WireDraw);
 }
 //ŠJ•ú

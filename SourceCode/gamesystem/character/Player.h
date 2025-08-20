@@ -25,6 +25,7 @@ public:
 	
 private:
 	XMFLOAT3 MoveVECTOR(XMVECTOR v, float angle);
+	void ChangeShapeType();
 private:
 	void LoadCSV();
 	void reLoadCSV();
@@ -41,4 +42,11 @@ private:
 
 private:
 	unique_ptr<CsvLoader> loader = nullptr;
+	enum WIreType
+	{
+		Sphere,
+		Box
+	};
+
+	int m_WireType = Sphere;
 };

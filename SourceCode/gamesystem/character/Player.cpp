@@ -50,6 +50,7 @@ void Player::InitState(const XMFLOAT3& pos) {
 	//m_WireDraw = true;
 	//移動処理用
 	velocity /= 5.0f;
+	m_WireType = WIreType::Box;
 }
 
 //更新処理
@@ -127,13 +128,13 @@ void Player::Draw()
 //ImGui
 void Player::ImGuiDraw() {
 	ImGui::Begin("Player");
-	ImGui::Text("AddPower:%f", m_AddSpeed);
-	ImGui::Text("RotX:%f", m_Rotation.y);
-	ImGui::Text("PosX:%f", m_Position.x);
-	ImGui::Text("PosZ:%f", m_Position.z);
 	ImGui::Text("HP:%d", m_HP);
 	if (ImGui::Button("reLoad", ImVec2(90, 50))) {
 		reLoadCSV();
+	}
+	ImGui::RadioButton("Sphere", &m_WireType,Sphere); ImGui::SameLine(); ImGui::RadioButton("Box", &m_WireType, Box);
+	if (ImGui::Button("modelChange", ImVec2(90, 50))) {
+		ChangeShapeType();
 	}
 	ImGui::Checkbox("wireDraw", &m_WireDraw);
 	ImGui::End();
@@ -146,4 +147,13 @@ void Player::BirthParticle() {
 	float e_scale = 0.0f;
 
 	ParticleEmitter::GetInstance()->FireEffect(50, { m_Position.x,m_Position.y + 2.0f,m_Position.z }, s_scale, e_scale, s_color, e_color);
+}
+
+void Player::ChangeShapeType() {
+	if (m_WireType == Sphere) {
+		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
+	}
+	else {
+		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
+	}
 }
