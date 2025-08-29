@@ -41,16 +41,15 @@ bool NormalEnemy::Initialize() {
 }
 
 void NormalEnemy::BehaviorInit() {
-	// ... Šù‘¶‚Ì‰Šú‰»ˆ— ...
-
 	auto root = std::make_unique<Selector>();
 
-	// ‡@ UŒ‚ğŒ
+	//‹——£‚É‚æ‚Á‚Ä“®‚«‚ğŒˆ‚ß‚é
+	//UŒ‚
 	auto attackSeq = std::make_unique<Sequence>();
 	attackSeq->AddChild(std::make_unique<Condition>([this]() {
 		return Helper::GetInstance()->ChechLength(
 			m_Position, Player::GetInstance()->GetPosition()
-		) < 1.0f;  // UŒ‚”ÍˆÍ
+		) < 1.0f;
 		}));
 	attackSeq->AddChild(std::make_unique<Action>([this]() {
 		this->Attack();
@@ -58,12 +57,12 @@ void NormalEnemy::BehaviorInit() {
 		}));
 	root->AddChild(std::move(attackSeq));
 
-	// ‡A ’Ç]ğŒ
+	//’Ç]
 	auto followSeq = std::make_unique<Sequence>();
 	followSeq->AddChild(std::make_unique<Condition>([this]() {
 		return Helper::GetInstance()->ChechLength(
 			m_Position, Player::GetInstance()->GetPosition()
-		) < 3.0f;  // ’Ç]”ÍˆÍ
+		) < 3.0f;
 		}));
 	followSeq->AddChild(std::make_unique<Action>([this]() {
 		this->Follow();
@@ -71,7 +70,7 @@ void NormalEnemy::BehaviorInit() {
 		}));
 	root->AddChild(std::move(followSeq));
 
-	// ‡B ‰“‚¯‚ê‚Î‘Ò‹@
+	//‘Ò‹@
 	root->AddChild(std::make_unique<Action>([this]() {
 		this->Inter();
 		return NodeStatus::Success;
@@ -80,20 +79,12 @@ void NormalEnemy::BehaviorInit() {
 	// ƒcƒŠ[‚ğ•Û
 	m_BehaviorTree = std::make_unique<BehaviorTree>(std::move(root));
 }
-
-void (NormalEnemy::* NormalEnemy::stateTable[])() = {
-	&NormalEnemy::Inter,//“®‚«‚Ì‡ŠÔ
-	&NormalEnemy::Follow,//’Ç]
-};
-
 //s“®
 void NormalEnemy::Act() {
 	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f };
-
-	// ¥‚±‚±‚ğBT‚Åˆ—‚³‚¹‚é¥
-
+	
+	//ƒrƒwƒCƒrƒAƒcƒŠ[‚ÌÀs
 	if (m_BehaviorTree) {
-
 		m_BehaviorTree->Tick();
 	}
 
