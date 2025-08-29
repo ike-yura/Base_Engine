@@ -13,21 +13,6 @@ public:
 
 	void Draw() override;//描画
 private:
-	//キャラの状態
-	enum CharaState
-	{
-		STATE_INTER,
-		STATE_FOLLOW,
-		STATE_CIRCLE,
-		STATE_SIN,
-	};
-
-	//関数ポインタ
-	static void(NormalEnemy::* stateTable[])();
-
-	int _charaState = STATE_INTER;
-
-private:
 	void Attack();
 	void Inter();//待機
 	void Follow();//追従
