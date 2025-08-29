@@ -21,7 +21,6 @@ void InterEnemy::ImGuiDraw() {
 
 void InterEnemy::ChangeShapeType() {
 	if (m_WireType == Sphere) {
-
 		m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::SPHERE));
 		m_HitShape = HitShape::Type::Sphere;
 		m_Scale = { 0.5f,0.5f,0.5f };

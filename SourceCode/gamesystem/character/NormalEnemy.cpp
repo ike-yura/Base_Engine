@@ -26,8 +26,7 @@ bool NormalEnemy::Initialize() {
 
 	m_Scale = { 1.5f,0.5f,0.5f };
 	m_Rotation = { 0.0f,0.0f,0.0f };
-	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f };
-
+	
 	XMFLOAT3 m_RandPos = {};
 	m_RandPos.x = static_cast<float>(Helper::GetInstance()->GetRanNum(-5, 5));
 	m_RandPos.y = -5.0f;
@@ -48,7 +47,7 @@ void (NormalEnemy::* NormalEnemy::stateTable[])() = {
 //s“®
 void NormalEnemy::Action() {
 	(this->*stateTable[_charaState])();
-	
+	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f };
 	Obj_SetParam();
 	ColObj_SetParam();
 }
@@ -60,6 +59,7 @@ void NormalEnemy::Draw() {
 void NormalEnemy::ImGui_Origin() {
 	ImGui::Checkbox("WireDraw", &m_WireDraw);
 	ImGui::RadioButton("Sphere", &m_WireType, Sphere); ImGui::SameLine(); ImGui::RadioButton("Box", &m_WireType, Box);
+	ImGui::SliderFloat("scaleX", &m_Scale.x, 0.1f, 1.5f);
 	if (ImGui::Button("modelChange", ImVec2(90, 50))) {
 		ChangeShapeType();
 	}
