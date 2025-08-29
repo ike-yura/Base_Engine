@@ -327,6 +327,21 @@
     <ClCompile Include="SourceCode\engine\collision\HitChecker.cpp">
       <Filter>engine\collision</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\engine\BehaviorTree\Action.cpp">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\engine\BehaviorTree\BehaviorTree.cpp">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\engine\BehaviorTree\Condition.cpp">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\engine\BehaviorTree\Selector.cpp">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\engine\BehaviorTree\Sequence.cpp">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\engine\camera\DebugCamera.h">
@@ -619,6 +634,24 @@
     <ClInclude Include="SourceCode\engine\collision\HitShape.h">
       <Filter>engine\collision</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\engine\BehaviorTree\Action.h">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\BehaviorTree\BehaviorTree.h">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\BehaviorTree\BTNode.h">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\BehaviorTree\Condition.h">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\BehaviorTree\Selector.h">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\engine\BehaviorTree\Sequence.h">
+      <Filter>engine\BehaviorTree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli">
@@ -829,6 +862,9 @@
     </Filter>
     <Filter Include="gamesystem\charactor\Manager">
       <UniqueIdentifier>{10374d27-295f-4e78-94ac-1f854a0ae290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\BehaviorTree">
+      <UniqueIdentifier>{f3b3f4cb-1f4c-4e5c-bf07-91449f6acba6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

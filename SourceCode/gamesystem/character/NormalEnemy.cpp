@@ -1,5 +1,6 @@
 #include "NormalEnemy.h"
 #include <random>
+#include <memory>
 #include "Player.h"
 #include "Collision.h"
 #include "CsvLoader.h"
@@ -24,7 +25,7 @@ bool NormalEnemy::Initialize() {
 	m_ColObject->Initialize();
 	m_ColObject->SetModel(ModelManager::GetInstance()->GetModel(ModelManager::BOX));
 
-	m_Scale = { 1.5f,0.5f,0.5f };
+	m_Scale = { 0.5f,0.5f,0.5f };
 	m_Rotation = { 0.0f,0.0f,0.0f };
 	
 	XMFLOAT3 m_RandPos = {};
@@ -34,20 +35,68 @@ bool NormalEnemy::Initialize() {
 	m_Position = m_RandPos;
 	m_WireType = WIreType::Box;
 	m_HitShape = HitShape::Type::AABB;
+
+	BehaviorInit();
 	return true;
+}
+
+void NormalEnemy::BehaviorInit() {
+	// ... Šù‘¶‚Ì‰Šú‰»ˆ— ...
+
+	auto root = std::make_unique<Selector>();
+
+	// ‡@ UŒ‚ğŒ
+	auto attackSeq = std::make_unique<Sequence>();
+	attackSeq->AddChild(std::make_unique<Condition>([this]() {
+		return Helper::GetInstance()->ChechLength(
+			m_Position, Player::GetInstance()->GetPosition()
+		) < 1.0f;  // UŒ‚”ÍˆÍ
+		}));
+	attackSeq->AddChild(std::make_unique<Action>([this]() {
+		this->Attack();
+		return NodeStatus::Success;
+		}));
+	root->AddChild(std::move(attackSeq));
+
+	// ‡A ’Ç]ğŒ
+	auto followSeq = std::make_unique<Sequence>();
+	followSeq->AddChild(std::make_unique<Condition>([this]() {
+		return Helper::GetInstance()->ChechLength(
+			m_Position, Player::GetInstance()->GetPosition()
+		) < 3.0f;  // ’Ç]”ÍˆÍ
+		}));
+	followSeq->AddChild(std::make_unique<Action>([this]() {
+		this->Follow();
+		return NodeStatus::Success;
+		}));
+	root->AddChild(std::move(followSeq));
+
+	// ‡B ‰“‚¯‚ê‚Î‘Ò‹@
+	root->AddChild(std::make_unique<Action>([this]() {
+		this->Inter();
+		return NodeStatus::Success;
+		}));
+
+	// ƒcƒŠ[‚ğ•Û
+	m_BehaviorTree = std::make_unique<BehaviorTree>(std::move(root));
 }
 
 void (NormalEnemy::* NormalEnemy::stateTable[])() = {
 	&NormalEnemy::Inter,//“®‚«‚Ì‡ŠÔ
 	&NormalEnemy::Follow,//’Ç]
-	&NormalEnemy::Circle,//‰~‰^“®
-	&NormalEnemy::MoveSin,//Sin”g
 };
 
 //s“®
-void NormalEnemy::Action() {
-	(this->*stateTable[_charaState])();
+void NormalEnemy::Act() {
 	m_ColScale = { m_Scale.x + 0.25f,m_Scale.y + 0.25f,m_Scale.z + 0.25f };
+
+	// ¥‚±‚±‚ğBT‚Åˆ—‚³‚¹‚é¥
+
+	if (m_BehaviorTree) {
+
+		m_BehaviorTree->Tick();
+	}
+
 	Obj_SetParam();
 	ColObj_SetParam();
 }
@@ -71,28 +120,13 @@ void NormalEnemy::Finalize() {
 }
 //’Ç]
 void NormalEnemy::Follow() {
-	Helper::GetInstance()->FollowMove(m_Position, Player::GetInstance()->GetPosition(), 0.1f);
+	Helper::GetInstance()->FollowMove(m_Position, Player::GetInstance()->GetPosition(), 0.05f);
 }
-//‰~‰^“®
-void NormalEnemy::Circle() {
-	
-	m_CircleSpeed += 0.5f;
-	if (m_CircleScale < 7.0f) {
-		m_CircleScale += 0.3f;
-	}
-
-	m_AfterPos = Helper::GetInstance()->CircleMove(m_StartPos, m_CircleScale, m_CircleSpeed);
-
-	m_Position = {
-		Ease(In,Cubic,0.2f,m_Position.x,m_AfterPos.x),
-		m_Position.y,
-		Ease(In,Cubic,0.2f,m_Position.z,m_AfterPos.z),
-	};
-}
-//
-void NormalEnemy::MoveSin() {
-
-}
+//‘Ò‹@
 void NormalEnemy::Inter() {
-
+	m_Rotation.y += 1.0f;
+}
+//UŒ‚
+void NormalEnemy::Attack() {
+	m_Rotation.y += 3.0f;
 }

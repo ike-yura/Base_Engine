@@ -8,8 +8,7 @@ bool InterEnemy::Initialize() {
 }
 //更新
 void InterEnemy::Update() {
-	//�s��
-	Action();
+	Act();
 }
 //描画
 void InterEnemy::Draw() {

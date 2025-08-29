@@ -57,6 +57,28 @@ void Player::InitState(const XMFLOAT3& pos) {
 //更新処理
 void Player::Update()
 {
+	Move();
+	Jump();
+	//リミット制限
+	Helper::GetInstance()->Clamp(m_Position.x, -5.0f, 5.0f);
+	Helper::GetInstance()->Clamp(m_Position.z, -5.0f, 5.0f);
+
+	BirthParticle();
+	Obj_SetParam();
+	ColObj_SetParam();
+}
+//VECTOR
+XMFLOAT3 Player::MoveVECTOR(XMVECTOR v, float angle)
+{
+	XMMATRIX rot2 = {};
+	rot2 = XMMatrixRotationY(XMConvertToRadians(angle));
+	v = XMVector3TransformNormal(v, rot2);
+	XMFLOAT3 pos = { v.m128_f32[0], v.m128_f32[1], v.m128_f32[2] };
+	return pos;
+}
+
+//プレイヤーの動き
+void Player::Move() {
 	XMFLOAT3 rot = m_Rotation;
 	Input* input = Input::GetInstance();
 	float StickX = input->GetLeftControllerX();
@@ -102,23 +124,25 @@ void Player::Update()
 		m_Position.x += move.m128_f32[0] * m_AddSpeed;
 		m_Position.z += move.m128_f32[2] * m_AddSpeed;
 	}
-
-	//リミット制限
-	Helper::GetInstance()->Clamp(m_Position.x, -5.0f, 5.0f);
-	Helper::GetInstance()->Clamp(m_Position.z, -5.0f, 5.0f);
-
-	BirthParticle();
-	Obj_SetParam();
-	ColObj_SetParam();
 }
-//VECTOR
-XMFLOAT3 Player::MoveVECTOR(XMVECTOR v, float angle)
-{
-	XMMATRIX rot2 = {};
-	rot2 = XMMatrixRotationY(XMConvertToRadians(angle));
-	v = XMVector3TransformNormal(v, rot2);
-	XMFLOAT3 pos = { v.m128_f32[0], v.m128_f32[1], v.m128_f32[2] };
-	return pos;
+//プレイヤーのジャンプ
+void Player::Jump() {
+	Input* input = Input::GetInstance();
+	if (input->TriggerButton(input->A) && !m_Jump) {
+		m_Jump = true;
+		m_AddPower = 0.4f;
+	}
+
+	if (m_Jump) {
+		m_AddPower -= m_Gravity;
+		m_Position.y += m_AddPower;
+
+		if (m_Position.y < -5.0f && m_AddPower < 0.0f) {
+			m_Position.y = -5.0f;
+			m_Jump = false;
+			m_AddPower = 0.0f;
+		}
+	}
 }
 //描画
 void Player::Draw()
@@ -138,6 +162,7 @@ void Player::ImGuiDraw() {
 		ChangeShapeType();
 	}
 	ImGui::Checkbox("wireDraw", &m_WireDraw);
+	ImGui::Text("posY:%f", m_Position.y);
 	ImGui::End();
 }
 
