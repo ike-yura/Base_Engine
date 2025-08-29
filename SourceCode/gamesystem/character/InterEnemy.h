@@ -1,5 +1,11 @@
 #pragma once
 #include "ObjCommon.h"
+#include "BehaviorTree.h"
+#include "Selector.h"
+#include "Sequence.h"
+#include "Condition.h"
+#include "Action.h"
+
 //敵基底
 class InterEnemy :
 	public ObjCommon {
@@ -21,6 +27,8 @@ protected:
 	};
 
 	int m_WireType = Sphere;
+	// 敵AI用のビヘイビアツリー
+	std::unique_ptr<BehaviorTree> m_BehaviorTree;
 public:
 	//virtual ~InterEnemy() = default;
 
@@ -28,6 +36,8 @@ public:
 	/// 初期化
 	/// </summary>
 	virtual bool Initialize()override;
+	
+	virtual void BehaviorInit() = 0;//ビヘイビアツリーの初期化
 	/// <summary>
 	/// 終了
 	/// </summary>
@@ -37,7 +47,7 @@ public:
 	/// </summary>
 	void Update();
 
-	virtual void Action() = 0;//敵の行動
+	virtual void Act() = 0;//敵の行動
 
 	/// <summary>
 	/// 描画

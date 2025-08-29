@@ -6,8 +6,9 @@ class NormalEnemy :public InterEnemy {
 public:
 	NormalEnemy();
 	bool Initialize() override;//初期化
+	void BehaviorInit() override;//ビヘイビアツリーの初期化
 	void Finalize() override;//開放
-	void Action()override;//更新
+	void Act()override;//更新
 	void ImGui_Origin()override;
 
 	void Draw() override;//描画
@@ -27,10 +28,9 @@ private:
 	int _charaState = STATE_INTER;
 
 private:
+	void Attack();
 	void Inter();//待機
-	void Circle();//円運動
 	void Follow();//追従
-	void MoveSin();//sin波
 protected:
 
 private:

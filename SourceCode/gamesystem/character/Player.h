@@ -26,6 +26,8 @@ public:
 private:
 	XMFLOAT3 MoveVECTOR(XMVECTOR v, float angle);
 	void ChangeShapeType();
+	void Move();
+	void Jump();
 private:
 	void LoadCSV();
 	void reLoadCSV();
@@ -37,8 +39,13 @@ private:
 	float velocity;
 	//移動加算値
 	float m_AddSpeed;
+	//上昇度
+	float m_AddPower = 0.0f;
+	//重力加速度
+	float m_Gravity = 0.02f;
 	//プレイヤーのHP
 	int m_HP = 0;
+	bool m_Jump = false;
 
 private:
 	unique_ptr<CsvLoader> loader = nullptr;

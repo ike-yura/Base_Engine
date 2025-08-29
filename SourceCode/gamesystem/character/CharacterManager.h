@@ -13,5 +13,5 @@ public:
 	//Imgui
 	void ImguiDraw();
 private:
-	array<unique_ptr<InterEnemy>, 2> enemy;
+	array<unique_ptr<InterEnemy>, 1> enemy;
 };
